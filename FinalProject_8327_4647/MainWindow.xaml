@@ -3,10 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FinalProject_8327_4647"
+        xmlns:viewModel="clr-namespace:FinalProject_8327_4647"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Window.Resources>
+        <viewModel:ViewModel x:Key="StarViewModel" />
+    </Window.Resources>
+    <StackPanel Orientation="Vertical" DataContext="{StaticResource ResourceKey=StarViewModel}">
+        <ListView BorderThickness="2" x:Name="lstStars"
+        IsSynchronizedWithCurrentItem="True" ItemsSource="{StaticResource ResourceKey=StarViewModel}" 
+        DisplayMemberPath="Name" Margin="0,0,0,28" />
+
+        <TextBox Text="{Binding Path=Size}" />
+
+    </StackPanel>
 </Window>

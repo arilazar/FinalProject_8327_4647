@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace FinalProject_8327_4647
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for page1.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class page1 : UserControl
     {
-        public MainWindow()
+        public page1()
         {
             InitializeComponent();
         }
-       
     }
 }
