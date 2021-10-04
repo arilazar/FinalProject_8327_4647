@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalProject_8327_4647
+namespace FinalProject_8327_4647.ViewModels
 {
     class ViewModel : ObservableCollection<Star>
     {

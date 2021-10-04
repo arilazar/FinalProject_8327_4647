@@ -25,9 +25,5 @@ namespace FinalProject_8327_4647
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

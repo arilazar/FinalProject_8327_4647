@@ -20,10 +20,28 @@ namespace FinalProject_8327_4647
     /// </summary>
     public partial class MainWindow : Window
     {
+        UIElement currentUserControl = null;
         public MainWindow()
         {
             InitializeComponent();
+            currentUserControl = new page1();
+            myGrid.Children.Add(currentUserControl);
         }
-       
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentUserControl != null)
+                myGrid.Children.Remove(currentUserControl);
+            currentUserControl = new MainMenu();
+            myGrid.Children.Add(currentUserControl);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (currentUserControl != null)
+                myGrid.Children.Remove(currentUserControl);
+            currentUserControl = new page1();
+            myGrid.Children.Add(currentUserControl);
+        }
     }
 }

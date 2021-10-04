@@ -3,12 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewModel="clr-namespace:FinalProject_8327_4647"
+             xmlns:viewModel="clr-namespace:FinalProject_8327_4647.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <viewModel:ImageDayViewModel x:Key="imageDayViewModel" />
+    </UserControl.Resources>
 
-
-    <Grid>
-            
+    <Grid DataContext="{StaticResource ResourceKey=imageDayViewModel}">
+        <Image Source="{Binding ImageDayUri}"> </Image>  
+        <!--<Image Source="C:\Users\Uziel Shemesh\Source\Repos\FinalProject_8327_4647\FinalProject_8327_4647\Images\pano1_wa.jpg"> </Image>-->  
     </Grid>
 </UserControl>

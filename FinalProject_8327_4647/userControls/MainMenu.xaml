@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
-        <Button Content="תמונת היום" Margin="10" Click="Button_Click"/>
+        <Button Content="תמונת היום" Margin="10"/>
         <Button Content="פרופיל נתונים" Margin="10"/>
         <Button Content="חיפוש תצלומים" Margin="10"/>
         <Button Content="הצגת סטטוס אובייקטים" Margin="10"/>
