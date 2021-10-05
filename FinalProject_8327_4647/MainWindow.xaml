@@ -9,22 +9,27 @@
     <Window.Resources>
         <viewModel:ViewModel x:Key="StarViewModel" />
     </Window.Resources>
-    <StackPanel x:Name="myGrid" Orientation="Horizontal" FlowDirection="RightToLeft"
-                DataContext="{StaticResource ResourceKey=StarViewModel}">
-        <StackPanel Width="100">
-            <Button Name = "imageDayButton" Content = "תמונת היום" Command = "{Binding Path=ButtonClickCommand}" CommandParameter="{Binding}" Height="30" Margin = "10" Click="Button_Click_1"/>
+    <Grid x:Name="myGrid" FlowDirection="RightToLeft" DataContext="{StaticResource ResourceKey=StarViewModel}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="600*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Button Name = "imageDayButton" Content = "תמונת היום" Height="30" Margin = "10" Click="Button_Click_1"/>
             <Button Name = "mainMenuButton" Content = "תפריט ראשי" Command = "{Binding Path=ButtonClickCommand}" CommandParameter="{Binding}" Height="30" Margin = "10" Click="Button_Click"/>
             <Button Name = "button_1" Content = "עוד כפתור" Command = "" Height="30" Margin = "10"/>
             <Button Name = "button_2" Content = "ועוד כפתור" Command = "" Height="30" Margin = "10"/>
 
-
         </StackPanel>
-        <ContentControl Content="{Binding UC}" Margin="0 20 0 0"/>
+        <ContentControl Margin="5" Grid.Column="1" BorderBrush="Black" BorderThickness="5"/>
+
+
+        <!--
         <ListView BorderThickness="2" x:Name="lstStars"
         IsSynchronizedWithCurrentItem="True" ItemsSource="{StaticResource ResourceKey=StarViewModel}" 
         DisplayMemberPath="Name" Margin="0,0,0,28" />
 
-        <TextBox Text="{Binding Path=Size}" />
+        <TextBox Text="{Binding Path=Size}" />-->
 
-    </StackPanel>
+    </Grid>
 </Window>

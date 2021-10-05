@@ -24,8 +24,8 @@ namespace FinalProject_8327_4647
         public MainWindow()
         {
             InitializeComponent();
-            currentUserControl = new page1();
-            myGrid.Children.Add(currentUserControl);
+            //currentUserControl = new ImageDayUserControl();
+            //myGrid.Children.Add(currentUserControl);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -33,6 +33,7 @@ namespace FinalProject_8327_4647
             if (currentUserControl != null)
                 myGrid.Children.Remove(currentUserControl);
             currentUserControl = new MainMenu();
+            Grid.SetColumn(currentUserControl, 1);
             myGrid.Children.Add(currentUserControl);
         }
 
@@ -40,7 +41,8 @@ namespace FinalProject_8327_4647
         {
             if (currentUserControl != null)
                 myGrid.Children.Remove(currentUserControl);
-            currentUserControl = new page1();
+            currentUserControl = new ImageDayUserControl();
+            Grid.SetColumn(currentUserControl, 1);
             myGrid.Children.Add(currentUserControl);
         }
     }

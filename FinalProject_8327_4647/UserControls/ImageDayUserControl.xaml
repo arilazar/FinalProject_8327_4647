@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="FinalProject_8327_4647.page1"
+﻿<UserControl x:Class="FinalProject_8327_4647.ImageDayUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,9 +9,13 @@
     <UserControl.Resources>
         <viewModel:ImageDayViewModel x:Key="imageDayViewModel" />
     </UserControl.Resources>
-
-    <Grid DataContext="{StaticResource ResourceKey=imageDayViewModel}">
-        <Image Source="{Binding ImageDayUri}"> </Image>  
-        <!--<Image Source="C:\Users\Uziel Shemesh\Source\Repos\FinalProject_8327_4647\FinalProject_8327_4647\Images\pano1_wa.jpg"> </Image>-->  
-    </Grid>
+    
+    <StackPanel Orientation="Vertical" >
+        <TextBlock Name="ImageName" HorizontalAlignment="Left"
+                   TextWrapping="Wrap"
+                   Text="{Binding Context.Title}"
+                   VerticalAlignment="Top"
+                   Margin="5"></TextBlock>
+        <Image Source="{Binding Context.ImageSource}"/>
+    </StackPanel>
 </UserControl>

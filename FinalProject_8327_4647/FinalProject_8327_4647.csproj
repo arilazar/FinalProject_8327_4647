@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\ButtonClickCommand.cs" />
+    <Compile Include="ImageDayContext.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="Star.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
@@ -72,7 +73,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model.cs" />
+    <Compile Include="Models\Model.cs" />
     <Compile Include="UserControls\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
@@ -80,14 +81,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\page1.xaml">
+    <Page Include="UserControls\ImageDayUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserControls\page1.xaml.cs">
-      <DependentUpon>page1.xaml</DependentUpon>
+    <Compile Include="UserControls\ImageDayUserControl.xaml.cs">
+      <DependentUpon>ImageDayUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject_8327_4647.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,22 @@ using System.Windows.Shapes;
 namespace FinalProject_8327_4647
 {
     /// <summary>
-    /// Interaction logic for page1.xaml
+    /// Interaction logic for ImageDayUserControl.xaml
     /// </summary>
-    public partial class page1 : UserControl
+    public partial class ImageDayUserControl : UserControl
     {
-        public page1()
+        private ImageDayViewModel viewModel; 
+        public ImageDayUserControl()
         {
             InitializeComponent();
+            viewModel = new ImageDayViewModel();
+            initialize();
+            DataContext = viewModel;
+        }
+
+        private async void initialize()
+        {
+            await viewModel.GetLatestImageAsync();
         }
     }
 }
