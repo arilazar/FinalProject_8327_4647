@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\ButtonClickCommand.cs" />
     <Compile Include="ImageDayContext.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="Star.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />

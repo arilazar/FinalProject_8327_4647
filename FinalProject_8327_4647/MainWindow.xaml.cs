@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FinalProject_8327_4647.Commands;
 
 namespace FinalProject_8327_4647
 {
@@ -26,22 +27,26 @@ namespace FinalProject_8327_4647
             InitializeComponent();
             //currentUserControl = new ImageDayUserControl();
             //myGrid.Children.Add(currentUserControl);
+            this.DataContext = this;
+        }
+        public RelayCommand Cmd1 => new RelayCommand(DoStuff1);
+        public RelayCommand Cmd2 => new RelayCommand(DoStuff2);
+
+        private void DoStuff1()
+        {
+            DoStuff(new ImageDayUserControl());
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void DoStuff2()
+        {
+            DoStuff(new MainMenu());
+        }
+
+        private void DoStuff(UIElement uc)
         {
             if (currentUserControl != null)
                 myGrid.Children.Remove(currentUserControl);
-            currentUserControl = new MainMenu();
-            Grid.SetColumn(currentUserControl, 1);
-            myGrid.Children.Add(currentUserControl);
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (currentUserControl != null)
-                myGrid.Children.Remove(currentUserControl);
-            currentUserControl = new ImageDayUserControl();
+            currentUserControl = uc;
             Grid.SetColumn(currentUserControl, 1);
             myGrid.Children.Add(currentUserControl);
         }
