@@ -4,11 +4,106 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FinalProject_8327_4647"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="FinalProject_8327_4647.MainMenu"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             x:Class="FinalProject_8327_4647.MainMenu"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" >
 
-        <telerik:RadCarousel x:Name="MyCarousel" Background="Black" Height="400" />
+    <Grid>
+        <Grid.Resources >
+            <DataTemplate x:Key="customItemTemplate">
+                <Border Width="160" Height="250" BorderThickness="0">
+                    <Grid HorizontalAlignment="Center"
+						  VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <TextBlock>
+                                 <Run Text="{Binding Name}" Foreground="White"/>
+                                 <Run Text="   " />
+                                 <Run Text="{Binding Size}" Foreground="White"  />
+                                 <Run Text="   " />
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <Image VerticalAlignment="Center"
+									HorizontalAlignment="Center"
+                                    Source="{Binding ImageUrl}"
+									Margin="22,18,6,0"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <LinearGradientBrush x:Key="Carousel_ItemBackground_Selected" EndPoint="0.5,1" StartPoint="0.5,0">
+                <!--<GradientStop Color="#FFFCE79F" Offset="1"/>
+                <GradientStop Color="#FFFDD3A8"/>-->
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Carousel_ItemInnerBorder_Selected" EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF282828"/>
+                <GradientStop Color="#FF5F5F5F" Offset="1"/>
+            </LinearGradientBrush>
+            <Style TargetType="telerik:CarouselItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="telerik:CarouselItem">
+                            <Border x:Name="CarouselItemBackground">
+                                <ContentPresenter/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="CarouselItemBackground" Property="Background" Value="{StaticResource Carousel_ItemBackground_Selected}"/>
+                                    <Setter TargetName="CarouselItemBackground" Property="BorderBrush" Value="{StaticResource Carousel_ItemInnerBorder_Selected}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+        <telerik:CarouselItem IsSelected="True">
+
+        </telerik:CarouselItem>
+        <telerik:RadCarousel x:Name="MyCarousel" CanUserSelect="False" SelectionChanged="RadCarousel_SelectionChanged"  ItemTemplate="{StaticResource customItemTemplate}" HorizontalScrollBarVisibility="Visible">
+            <telerik:RadCarousel.Background>
+                <SolidColorBrush>black</SolidColorBrush>
+                <!--<ImageBrush ImageSource="file:///C:/Users/aril8/source/repos/FinalProject_8327_4647/FinalProject_8327_4647/Images/SpsaceBackg.jpg" />-->
+            </telerik:RadCarousel.Background>
 
 
+            <telerik:RadCarousel.ItemsPanel>
+
+                <ItemsPanelTemplate>
+
+                    <telerik:RadCarouselPanel x:Name="Panel" IsOpacityEnabled="False" IsPathVisible="True" IsContinuous="True" TopContainerChanged="Panel_TopContainerChanged"
+                                              ItemsPerPage="8" VerticalAlignment="Stretch" TopItemPathFraction="1.00" Focusable="False" FlowDirection="RightToLeft">
+
+                        <telerik:RadCarouselPanel.Path>
+                            <Path Stroke="Aqua" StrokeThickness="1" RenderTransformOrigin="0.5,0.5">
+                                <Path.Data >
+                                    <GeometryGroup>
+                                        <GeometryGroup.Transform>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="30"/>
+                                            </TransformGroup>
+                                        </GeometryGroup.Transform>
+                                        <EllipseGeometry Center="80,150" RadiusX="500" RadiusY="250" />
+                                    </GeometryGroup>
+                                </Path.Data>
+                            </Path>
+                        </telerik:RadCarouselPanel.Path>
+                        <telerik:RadCarouselPanel.ScaleStops>
+                            <telerik:PathStopCollection>
+                                <!--<telerik:PathStop PathFraction="0.4" Value="1.0"/>
+                                <telerik:PathStop PathFraction="0.5" Value="2.5"/>
+                                <telerik:PathStop PathFraction="0.6" Value="1.0"/>-->
+                            </telerik:PathStopCollection>
+                        </telerik:RadCarouselPanel.ScaleStops>
+                    </telerik:RadCarouselPanel>
+                </ItemsPanelTemplate>
+            </telerik:RadCarousel.ItemsPanel>
+        </telerik:RadCarousel>
+    </Grid>
 </UserControl>

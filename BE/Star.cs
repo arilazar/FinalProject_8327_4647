@@ -7,20 +7,23 @@ using System.Threading.Tasks;
 
 namespace FinalProject_8327_4647
 {
-    class Star : INotifyPropertyChanged
+    public class Star : INotifyPropertyChanged
     {
         #region "private fields"
 
         private String _name;
         private String _size;
-
+        private String _imageUrl;
         #endregion
 
         #region "public properties"
 
-        public string Name {
+        public string Name
+        {
             get { return _name; }
-            set { _name = value;
+            set
+            {
+                _name = value;
                 OnPropertyChanged("Name");
             }
         }
@@ -34,6 +37,15 @@ namespace FinalProject_8327_4647
                 OnPropertyChanged("Size");
             }
         }
+        public string ImageUrl
+        {
+            get { return _imageUrl; }
+            set
+            {
+                _imageUrl = value;
+                OnPropertyChanged("ImageUrl");
+            }
+        }
         #endregion
 
         #region "INotifyPropertyChanged members"
@@ -42,10 +54,12 @@ namespace FinalProject_8327_4647
 
         //This routine is called each time a property value has been set.
         //This will cause an event to notify WPF via data-bindingthat a change has occurred.
-        private void OnPropertyChanged(string propertyName) {
+        private void OnPropertyChanged(string propertyName)
+        {
 
             var handler = PropertyChanged;
-            if (handler != null) {
+            if (handler != null)
+            {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
             #endregion

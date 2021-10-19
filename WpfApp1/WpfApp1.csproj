@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9EB8C022-D2D9-4A55-B6DD-FD7D37F67A3A}</ProjectGuid>
+    <ProjectGuid>{12BEAE1D-0C51-4CD4-9B38-3A15D1B380E2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>FinalProject_8327_4647</RootNamespace>
-    <AssemblyName>FinalProject_8327_4647</AssemblyName>
+    <RootNamespace>WpfApp1</RootNamespace>
+    <AssemblyName>WpfApp1</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,17 +34,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>FinalProject_8327_4647.App</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -69,23 +64,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\ButtonClickCommand.cs" />
-    <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="UserControls\ImageSearchUC.xaml.cs">
-      <DependentUpon>ImageSearchUC.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\CommandViewModel.cs" />
-    <Compile Include="ViewModels\ImageSearchVM.cs" />
-    <Compile Include="ViewModels\ViewModel.cs" />
-    <Compile Include="ViewModels\ImageDayViewModel.cs" />
-    <Page Include="UserControls\ImageSearchUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\MainMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,23 +72,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\Model.cs" />
-    <Compile Include="UserControls\MainMenu.xaml.cs">
-      <DependentUpon>MainMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\ImageDayUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserControls\ImageDayUserControl.xaml.cs">
-      <DependentUpon>ImageDayUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -124,10 +91,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -137,31 +106,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\pano1_wa.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BE\BE.csproj">
-      <Project>{4e567889-245a-4e17-91d5-f7f92579599c}</Project>
+      <Project>{4E567889-245A-4E17-91D5-F7F92579599C}</Project>
       <Name>BE</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BL\BL.csproj">
-      <Project>{eacfebbf-8f0f-486c-8bc3-73f9154a24e4}</Project>
-      <Name>BL</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Earth.png" />
-    <Resource Include="Images\Jupiter.png" />
-    <Resource Include="Images\Mars.png" />
-    <Resource Include="Images\Mercury.png" />
-    <Resource Include="Images\Neptune.png" />
-    <Resource Include="Images\Saturn.png" />
-    <Resource Include="Images\Sun.png" />
-    <Resource Include="Images\Uranus.png" />
-    <Resource Include="Images\Venus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\spaceBackg.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

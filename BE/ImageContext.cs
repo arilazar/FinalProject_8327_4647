@@ -3,9 +3,9 @@ using System.Runtime.CompilerServices;
 using System.Windows.Media.Imaging;
 //using Annotations;
 
-namespace FinalProject_8327_4647
+namespace BE
 { 
-    public sealed class ImageDayContext : INotifyPropertyChanged
+    public sealed class ImageContext : INotifyPropertyChanged
     {
         private string title;
         private BitmapSource imageSource;

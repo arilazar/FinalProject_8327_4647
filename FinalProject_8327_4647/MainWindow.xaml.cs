@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FinalProject_8327_4647.Commands;
+using FinalProject_8327_4647.UserControls;
 
 namespace FinalProject_8327_4647
 {
@@ -25,12 +25,12 @@ namespace FinalProject_8327_4647
         public MainWindow()
         {
             InitializeComponent();
-            //currentUserControl = new ImageDayUserControl();
-            //myGrid.Children.Add(currentUserControl);
-            this.DataContext = this;
+            DataContext = this;
+            DoStuff1();
         }
         public RelayCommand Cmd1 => new RelayCommand(DoStuff1);
         public RelayCommand Cmd2 => new RelayCommand(DoStuff2);
+        public RelayCommand CmdTest => new RelayCommand(DoStuff3);
 
         private void DoStuff1()
         {
@@ -40,6 +40,11 @@ namespace FinalProject_8327_4647
         private void DoStuff2()
         {
             DoStuff(new MainMenu());
+        }
+
+        private void DoStuff3()
+        {
+            DoStuff(new ImageSearchUC());
         }
 
         private void DoStuff(UIElement uc)

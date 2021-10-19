@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using BE;
+using BL;
 
 namespace FinalProject_8327_4647.ViewModels
 {
-    class ImageDayViewModel
+    public class ImageDayViewModel
     {
-        public ImageDayContext Context { get; set; }
+        BLClass myBL = new BLClass();
+        public ImageContext Context { get; set; }
+        public APOD imageOfTheDay { get; set; }
 
         private HttpClient httpClient;
         private readonly Regex imgRegex = new Regex("<br>\\s+<a href=\"(?<link>.*?)\">\\s<img src=\"(?<src>.*?)\"", RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -22,10 +26,15 @@ namespace FinalProject_8327_4647.ViewModels
 
         private const string BaseUrl = "https://apod.nasa.gov/apod/";
 
+        public void getAPOD()
+        {
+            imageOfTheDay = myBL.getAPOD();
+        }
+
         public async Task GetLatestImageAsync()
         {
             httpClient = new HttpClient();
-            this.Context = new ImageDayContext
+            this.Context = new ImageContext
             {
                 Title = "Loading..."
             };

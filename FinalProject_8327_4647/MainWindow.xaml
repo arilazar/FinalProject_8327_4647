@@ -5,22 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:FinalProject_8327_4647.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Window.Resources>
+        Title="MainWindow" WindowState="Maximized" WindowStyle="None">
+    <!--<Window.Resources>
         <viewModel:ViewModel x:Key="StarViewModel" />
-    </Window.Resources>
+    </Window.Resources>-->
+    
     <Grid x:Name="myGrid" FlowDirection="RightToLeft">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*"/>
         <ColumnDefinition Width="600*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.Column="0" >
             <Button Name = "imageDayButton" Content = "תמונת היום" Command = "{Binding Cmd1}" Height="30" Margin = "10"/>
-            <Button Name = "mainMenuButton" Content = "תפריט ראשי" Command = "{Binding Cmd2}" Height="30" Margin = "10"/>
+            <Button Name = "mainMenuButton" Content = "פרופיל נתוני פלנטות" Command = "{Binding Cmd2}" Height="30" Margin = "10"/>
             <Button Name = "button_1" Content = "עוד כפתור" Height="30" Margin = "10"/>
             <Button Name = "button_2" Content = "ועוד כפתור" Height="30" Margin = "10"/>
+            <Button Name = "getImageTest" Content = "חיפוש תמונות" Command = "{Binding CmdTest}" Height="30" Margin = "10"/>
         </StackPanel>
-        <ContentControl Margin="5" Grid.Column="1" BorderBrush="Black" BorderThickness="5"/>
+        <ContentControl Margin="10" Grid.Column="1" BorderBrush="Black" BorderThickness="2"/>
 
         <!--
         <ListView BorderThickness="2" x:Name="lstStars"

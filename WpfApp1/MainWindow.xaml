@@ -1,0 +1,27 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1" xmlns:be="clr-namespace:BE;assembly=BE" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="WpfApp1.MainWindow"
+        d:DataContext="{d:DesignInstance Type={x:Type be:SearchImage}}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <!--<Image Source="https://images-assets.nasa.gov/image/PIA12235/PIA12235~thumb.jpg">
+            
+        </Image>-->
+
+        <ListView>
+            <Image Source="https://images-assets.nasa.gov/image/PIA12235/PIA12235~thumb.jpg"/>
+            <TextBlock Text="{Binding collection.Title}"/>
+        </ListView>
+        <telerik:RadNavigationView HorizontalAlignment="Stretch" Margin="27,53,43.6,39" PaneHeader="Header" VerticalAlignment="Stretch">
+            <telerik:RadNavigationView.Items>
+                <telerik:RadNavigationViewItem Content="Navigation item 1"/>
+                <telerik:RadNavigationViewItem Content="Navigation item 2"/>
+                <telerik:RadNavigationViewItem Content="Navigation item 3"/>
+            </telerik:RadNavigationView.Items>
+        </telerik:RadNavigationView>
+    </Grid>
+</Window>
