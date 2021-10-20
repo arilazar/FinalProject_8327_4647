@@ -52,7 +52,7 @@ namespace FinalProject_8327_4647
             if (currentUserControl != null)
                 myGrid.Children.Remove(currentUserControl);
             currentUserControl = uc;
-            Grid.SetColumn(currentUserControl, 1);
+            Grid.SetColumn(currentUserControl, 0);
             myGrid.Children.Add(currentUserControl);
         }
     }
