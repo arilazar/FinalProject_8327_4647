@@ -12,9 +12,9 @@
     </UserControl.Resources>
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button Name="searchBT" Command="{Binding SearchCMD}" Content="חיפוש" Margin="3"/>
+            <Button Name="searchBT" Content="חיפוש" Margin="3" RenderTransformOrigin="0.506,0.51" Click="searchBT_Click"/>
             <TextBox Name="searchTB" Width="300" Text="{Binding SearchVal}" />
-
+            <TextBox Name="confidenceTB" Width="100" Text="{Binding ConfidenceVal}" />
         </StackPanel>
 
         <ListView ItemsSource="{Binding SearchImageCollection}" HorizontalAlignment="Stretch" Height="900">
@@ -32,7 +32,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-        <!--ListBox x:Name="itemsList" ItemsSource="{Binding SearchImageCollection}" Height="300" Margin="30" IsSynchronizedWithCurrentItem="True">            <ListBox.ItemTemplate>                <DataTemplate>                    <StackPanel Orientation="Horizontal">                        <TextBox x:Name="resTitle" Text="{Binding Title}" Width="300"/>                        <Image Source="{Binding Url}" Height="100"/>                    </StackPanel>                </DataTemplate>            </ListBox.ItemTemplate>        </ListBox>-->
     </StackPanel>
 </UserControl>

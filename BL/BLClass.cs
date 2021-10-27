@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using BE;
 using DL;
 
@@ -10,23 +11,35 @@ namespace BL
 {
     public class BLClass
     {
-        IEnumerable<SearchImage> collection;
+        DLClass myDL = new DLClass();
 
-        Http http = new Http();
-        public APOD getAPOD()
+        public async Task<APOD> getAPOD()
         {
-            return http.getAPOD();
+            return await myDL.getAPOD();
+        }
+        public async Task<List<SearchImage>> GetSearchResults(string search, double confidence)
+        {
+            List<SearchImage> allImagesList = await myDL.GetSearchImages(search);
+            List<SearchImage> filteredImagesList = new List<SearchImage>();
+            if (confidence <= 30)
+                return allImagesList;
+            Parallel.ForEach(allImagesList, image =>
+            {
+                TagResult tag = myDL.getTag(image.Url);
+                if (tag.status.type == "success" && tag.result != null)
+                    if (tag.result.tags.Any((x) => x.confidence >= confidence && x.tag.en == "planet"))
+                        filteredImagesList.Add(image);
+            });
+            if (filteredImagesList.Count == 0)
+                return allImagesList;
+            Console.WriteLine("filter success!");
+            Console.WriteLine("תמונות שנשארו לאחר סינון " + filteredImagesList.Count);
+            return filteredImagesList;
         }
 
-        public IEnumerable<SearchImage> GetSearchResults(string search)
+        public async Task<NearEarth> getNearEarthObject(string start, string end)
         {
-            IEnumerable<SearchImage> collection = from item in http.GetSearchImages(search).Result.collection.items
-                                                  select new SearchImage(item.data[0].title,
-                                                                         item.data[0].description,
-                                                                         item.links[0].href);
-
-            //collection = new List<Item>(http.GetSearchImages(search).Result.collection.items);
-            return collection;
+            return await myDL.getNearEarthObject(start, end);
         }
     }
 }

@@ -16,16 +16,14 @@ using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Data;
 
-
 namespace FinalProject_8327_4647
 {
     /// <summary>
     /// Interaction logic for MainMenu.xaml
     /// </summary>
-    public partial class MainMenu : UserControl
+    public partial class PlanetsProfiles : UserControl
     {
-
-        public MainMenu()
+        public PlanetsProfiles()
         {
             InitializeComponent();
             this.MyCarousel.ItemsSource = GetStars();
@@ -81,8 +79,9 @@ namespace FinalProject_8327_4647
             star.Name = "רהב - נפטון";
             star.Size = "10000";
             star.ImageUrl = @"\Images\Neptune.png";
+            star.Descrip = new Star.Description();
+            star.Descrip.Category = "32";
             stars.Add(star);
-
 
             return stars;
         }
@@ -108,10 +107,14 @@ namespace FinalProject_8327_4647
             var item = (topContainer as CarouselItem).DataContext as Star;
             if (item != null)
             {
-                Dispatcher.BeginInvoke(new Action(() => MessageBox.Show(item.Name)),
-                            System.Windows.Threading.DispatcherPriority.Normal);
-            }
 
+                Dispatcher.BeginInvoke(new Action(() => GridDiscription.DataContext = item)
+                , System.Windows.Threading.DispatcherPriority.Normal);
+
+                //Dispatcher.BeginInvoke(new Action(() => MessageBox.Show(item.Name)),
+                //System.Windows.Threading.DispatcherPriority.Normal);
+
+            }
         }
     }
 }

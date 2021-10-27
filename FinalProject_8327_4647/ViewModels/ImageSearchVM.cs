@@ -1,24 +1,20 @@
-﻿using FinalProject_8327_4647.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using BL;
-using BE;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using BE;
 
 namespace FinalProject_8327_4647.ViewModels
 {
     public class ImageSearchVM : INotifyPropertyChanged
     {
+        ImageSearchModel model;
+
+        public ImageSearchVM()
+        {
+            model = new ImageSearchModel();
+        }
+
         private ObservableCollection<SearchImage> searchImageCollection = new ObservableCollection<SearchImage>();
         public ObservableCollection<SearchImage> SearchImageCollection
         {
@@ -40,16 +36,15 @@ namespace FinalProject_8327_4647.ViewModels
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public string SearchVal { get; set; }
-
-        private readonly BLClass myBL = new BLClass();
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void GetSearchImages()
+        public string SearchVal { get; set; }
+        public double ConfidenceVal { get; set; }
+
+
+        public void GetSearchResults(string search)
         {
-            SearchImageCollection = new ObservableCollection<SearchImage>(myBL.GetSearchResults(SearchVal));
+            SearchImageCollection = new ObservableCollection<SearchImage>(model.GetSearchImages(search, ConfidenceVal).Result);
         }
-        public RelayCommand SearchCMD => new RelayCommand(GetSearchImages);
     }
 }

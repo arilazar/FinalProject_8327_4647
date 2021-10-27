@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FinalProject_8327_4647.UserControls;
 
 namespace FinalProject_8327_4647
@@ -30,21 +18,31 @@ namespace FinalProject_8327_4647
         }
         public RelayCommand Cmd1 => new RelayCommand(DoStuff1);
         public RelayCommand Cmd2 => new RelayCommand(DoStuff2);
-        public RelayCommand CmdTest => new RelayCommand(DoStuff3);
+        public RelayCommand Cmd3 => new RelayCommand(DoStuff3);
+        public RelayCommand Cmd4 => new RelayCommand(DoStuff4);
+        public RelayCommand Cmd5 => new RelayCommand(DoStuff5);
 
         private void DoStuff1()
         {
-            DoStuff(new ImageDayUserControl());
+            DoStuff(new ImageDayUC());
         }
 
         private void DoStuff2()
         {
-            DoStuff(new MainMenu());
+            DoStuff(new PlanetsProfiles());
         }
 
         private void DoStuff3()
         {
             DoStuff(new ImageSearchUC());
+        }
+        private void DoStuff4()
+        {
+            //DoStuff(new ImageSearchUC());
+        }
+        private void DoStuff5()
+        {
+            Close();
         }
 
         private void DoStuff(UIElement uc)
@@ -52,7 +50,7 @@ namespace FinalProject_8327_4647
             if (currentUserControl != null)
                 myGrid.Children.Remove(currentUserControl);
             currentUserControl = uc;
-            Grid.SetColumn(currentUserControl, 1);
+            Grid.SetColumn(currentUserControl, 0);
             myGrid.Children.Add(currentUserControl);
         }
     }

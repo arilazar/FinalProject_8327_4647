@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using BE;
 using FinalProject_8327_4647.ViewModels;
 
 namespace FinalProject_8327_4647.UserControls
@@ -26,9 +13,18 @@ namespace FinalProject_8327_4647.UserControls
         private ImageSearchVM searchVM;
         public ImageSearchUC()
         {
-            InitializeComponent();
             searchVM = new ImageSearchVM();
             DataContext = searchVM;
+            InitializeComponent();
+        }
+
+        private void searchBT_Click(object sender, RoutedEventArgs e)
+        {
+            var thread = new Thread(() =>
+            {
+                searchVM.GetSearchResults(searchVM.SearchVal);
+            });
+            thread.Start();
         }
     }
 }

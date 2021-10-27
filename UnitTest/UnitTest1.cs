@@ -11,6 +11,11 @@ namespace DL.Tests
     [TestClass()]
     public class UnitTest1
     {
+        [TestMethod()]
+        public void getTagTest()
+        {
+            Assert.Fail();
+        }
         //[TestMethod()]
         //public void GetAPODTest()
         //{
@@ -27,7 +32,7 @@ namespace DL.Tests
         //    ImageSearchResult myDeserializedClass = JsonConvert.DeserializeObject<ImageSearchResult>(x);
         //    IEnumerable<string> res = from item in myDeserializedClass.collection.items
         //            select item.href;
-            
+
         //    Assert.Fail();
         //}
     }

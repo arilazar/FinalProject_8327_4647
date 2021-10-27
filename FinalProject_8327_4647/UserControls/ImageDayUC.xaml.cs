@@ -19,20 +19,14 @@ namespace FinalProject_8327_4647
     /// <summary>
     /// Interaction logic for ImageDayUserControl.xaml
     /// </summary>
-    public partial class ImageDayUserControl : UserControl
+    public partial class ImageDayUC : UserControl
     {
-        private ImageDayViewModel viewModel; 
-        public ImageDayUserControl()
+        private readonly ImageDayVM viewModel = new ImageDayVM();
+
+        public ImageDayUC()
         {
             InitializeComponent();
-            viewModel = new ImageDayViewModel();
-            initialize();
             DataContext = viewModel;
-        }
-
-        private async void initialize()
-        {
-            await viewModel.GetLatestImageAsync();
         }
     }
 }
