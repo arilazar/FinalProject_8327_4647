@@ -1,5 +1,7 @@
 ﻿using BE;
 using BL;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FinalProject_8327_4647.Models
@@ -12,9 +14,12 @@ namespace FinalProject_8327_4647.Models
         {
             bLClass = new BLClass();
         }
-        public async Task<NearEarth> getNearEarthObject(string start, string end)
+        public List<NEO> getNearEarthObject(string start, string end, bool hazard, int minSize)
         {
-            return await bLClass.getNearEarthObject(start, end); 
+            return (from element in Task.Run(() => bLClass.getNearEarthObject(start, end)).Result
+                    where element.IsPotentiallyHazardousAsteroid == hazard
+                    && element.EstimatedDiameter > minSize
+                    select element).ToList();
         }
     }
 }

@@ -11,11 +11,10 @@ namespace BE
 {
     public class SearchImage : INotifyPropertyChanged
     {
-        public SearchImage(string title, string description, /*DateTime date,*/ string url)
+        public SearchImage(string title, string description, string url)
         {
             Title = title;
             Description = description;
-            //Date = date;
             Url = url;
         }
         private string title;

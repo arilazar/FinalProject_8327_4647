@@ -37,9 +37,15 @@ namespace BL
             return filteredImagesList;
         }
 
-        public async Task<NearEarth> getNearEarthObject(string start, string end)
+        public async Task<List<NEO>> getNearEarthObject(string start, string end)
         {
             return await myDL.getNearEarthObject(start, end);
+            //var count = jsonValue.ElementCount;
+            //List<NearEarthObject> returnList = new List<NearEarthObject>();
+            //foreach (KeyValuePair<string, NearEarthObject[]> day in jsonValue.NearEarthObjects)
+            //    foreach (var element in day.Value)
+            //        returnList.Add(element);
+            //return returnList;
         }
     }
 }

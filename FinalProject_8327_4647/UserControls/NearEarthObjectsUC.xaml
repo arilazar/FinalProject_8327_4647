@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="FinalProject_8327_4647.UserControls.NearEarthObjectsUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FinalProject_8327_4647.UserControls"
+             xmlns:local1="clr-namespace:FinalProject_8327_4647.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:viewModel="clr-namespace:FinalProject_8327_4647.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewModel:NearEarthVM}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <local1:CheckBoxConverter x:Key="CBConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="0" Margin="10,10,50,10">
+            <Button x:Name="searchHazardsBT" Content="חפש איומים" Click="SearchHazardsBT_Click"/>
+            <TextBlock Text="גודל מינימאלי"/>
+            <TextBox x:Name="minSizeTB" Width="50" Text="{Binding MinSize}"/>
+            <TextBlock Text="מסוכן?"/>
+            <CheckBox x:Name="hazardCB" IsChecked="{Binding Path=HazardOnly,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,Converter={StaticResource CBConverter}}"/>
+            <TextBlock Text="מתאריך"/>
+            <DatePicker x:Name="fromDate" SelectedDate="{Binding FromDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="fromDate_SelectedDateChanged"/>
+            <TextBlock Text="עד תאריך"/>
+            <DatePicker x:Name="toDate" SelectedDate="{Binding ToDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="toDate_SelectedDateChanged"/>
+        </StackPanel>
+        <DataGrid Name="dataGrid" Grid.Row="1" HorizontalAlignment="Stretch" Margin="50" GridLinesVisibility="Vertical" HeadersVisibility="All"
+                  Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue" IsReadOnly="True"
+                  CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False"/>
+    </Grid>
+</UserControl>
