@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -40,7 +41,6 @@ namespace DL
 
         public async Task<APOD> getAPOD()
         {
-            var x = getNearEarthObject("2021-10-26", "2021-10-27").Result;
             string url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
             string responseBody = await httpClient.GetStringAsync(url);
             APOD myDeserializedClass = JsonConvert.DeserializeObject<APOD>(responseBody);
@@ -75,15 +75,32 @@ namespace DL
             string uri = $"{path}{fileName}.png?alt=media";
         }
 
-        public async Task<NearEarth> getNearEarthObject(string start, string end)
+        public async Task<List<NEO>> getNearEarthObject(string start, string end)
         {
-
             string APIKEY = "dKGbkafEfGBA8WM7V5LwguoCAIoP9DfhITdKbb59";
             string uri = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={start}&end_date={end}&api_key={APIKEY}";
             string responseBody = await httpClient.GetStringAsync(uri);
 
             NearEarth nearEarth = NearEarth.FromJson(responseBody);
-            return nearEarth;
+            var x = (from KeyValuePair<string, NearEarthObject[]> day in nearEarth.NearEarthObjects
+                     from NearEarthObject nearEarthObj in day.Value
+                     select nearEarthObj).ToList();
+            var neoList = new List<NEO>();
+
+            foreach (KeyValuePair<string, NearEarthObject[]> day in nearEarth.NearEarthObjects)
+            {
+                foreach (NearEarthObject neo in day.Value)
+                {
+                    neoList.Add(new NEO(
+                        day.Key,
+                        neo.Id,
+                        neo.Name,
+                        neo.AbsoluteMagnitudeH,
+                        neo.EstimatedDiameter.Meters.EstimatedDiameterMin,
+                        neo.IsPotentiallyHazardousAsteroid));
+                }
+            }
+            return neoList;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace FinalProject_8327_4647
         {
             InitializeComponent();
             DataContext = this;
-            DoStuff1();
+            //DoStuff1();
         }
         public RelayCommand Cmd1 => new RelayCommand(DoStuff1);
         public RelayCommand Cmd2 => new RelayCommand(DoStuff2);
@@ -38,7 +38,7 @@ namespace FinalProject_8327_4647
         }
         private void DoStuff4()
         {
-            //DoStuff(new ImageSearchUC());
+            DoStuff(new NearEarthObjectsUC());
         }
         private void DoStuff5()
         {
