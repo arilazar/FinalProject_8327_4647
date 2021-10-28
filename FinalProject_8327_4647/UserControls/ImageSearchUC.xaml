@@ -4,20 +4,49 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModel="clr-namespace:FinalProject_8327_4647.ViewModels" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
              d:DataContext="{d:DesignInstance Type=viewModel:ImageSearchVM}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <viewModel:ImageSearchVM x:Key="searchVM"/>
     </UserControl.Resources>
-    <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button Name="searchBT" Content="חיפוש" Margin="3" RenderTransformOrigin="0.506,0.51" Click="searchBT_Click"/>
-            <TextBox Name="searchTB" Width="300" Text="{Binding SearchVal}" />
-            <TextBox Name="confidenceTB" Width="100" Text="{Binding ConfidenceVal}" />
-        </StackPanel>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/FinalProject_8327_4647;component/Images/planetsBack.png"  />
 
-        <ListView ItemsSource="{Binding SearchImageCollection}" HorizontalAlignment="Stretch" Height="900">
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="SkyBlue" BorderThickness="2" Width="500" Background="Transparent" Margin="10">
+            <StackPanel Grid.Row="0" Height="100"  Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" FlowDirection="RightToLeft">
+                <TextBox Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Name="searchTB" Width="150" Text="{Binding SearchVal}" Margin="10,0,0,50" materialDesign:HintAssist.Hint="שם" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.HelperText="מלא שם תמונה "/>
+                <ComboBox Name="confidenceTB" Foreground="White" FontSize="16" Width="110" Text="{Binding ConfidenceVal}"  materialDesign:HintAssist.Hint="אמינות" Margin="30,0,0,56"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.HelperText="בחר אחוז אמינות לחיפוש">
+                    <ComboBoxItem Foreground="White">0</ComboBoxItem>
+                    <ComboBoxItem>10</ComboBoxItem>
+                    <ComboBoxItem>20</ComboBoxItem>
+                    <ComboBoxItem>30</ComboBoxItem>
+                    <ComboBoxItem>40</ComboBoxItem>
+                    <ComboBoxItem>50</ComboBoxItem>
+                    <ComboBoxItem>60</ComboBoxItem>
+                    <ComboBoxItem>70</ComboBoxItem>
+                    <ComboBoxItem>80</ComboBoxItem>
+                    <ComboBoxItem>90</ComboBoxItem>
+                    <ComboBoxItem>100</ComboBoxItem>
+                    <ComboBox.Resources>
+                        <SolidColorBrush x:Key="MaterialDesignPaper" Color="Black"/>
+                    </ComboBox.Resources>
+                </ComboBox>
+                <Button x:Name="searchBT" Content="חיפוש" Margin="30,10,10,40" RenderTransformOrigin="0.506,0.51" Click="searchBT_Click"/>
+            </StackPanel>
+        </Border>
+
+        <ListView Grid.Row="1" ItemsSource="{Binding SearchImageCollection}" HorizontalAlignment="Stretch" Margin="15" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4" HorizontalAlignment="Stretch"/>
@@ -25,12 +54,19 @@
             </ItemsControl.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <Image Source="{Binding Url}" Width="200" Height="200" Stretch="Uniform" />
-                        <TextBlock Text="{Binding Title}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+                    <Border Background="Black" BorderBrush="SkyBlue" BorderThickness="1">
+
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Image Source="{Binding Url}" Width="300" Height="300" Stretch="Uniform" />
+                        
+                        <TextBlock Text="{Binding Title}" Margin="5" Background="Black" Foreground="White" FontWeight="DemiBold" FontSize="14" Width="300" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
                     </StackPanel>
+                    </Border>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </StackPanel>
+    </Grid>
+       
+   
 </UserControl>
