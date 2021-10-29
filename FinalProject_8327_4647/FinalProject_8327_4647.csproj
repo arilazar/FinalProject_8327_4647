@@ -146,6 +146,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Images\.editorconfig" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -156,7 +157,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\pano1_wa.jpg" />
+    <ProjectReference Include="..\BE\BE.csproj">
+      <Project>{4e567889-245a-4e17-91d5-f7f92579599c}</Project>
+      <Name>BE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BL\BL.csproj">
+      <Project>{eacfebbf-8f0f-486c-8bc3-73f9154a24e4}</Project>
+      <Name>BL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Earth.png" />
@@ -164,13 +175,15 @@
     <Resource Include="Images\Mars.png" />
     <Resource Include="Images\Mercury.png" />
     <Resource Include="Images\Neptune.png" />
+    <Resource Include="Images\pano1_wa.jpg" />
     <Resource Include="Images\Saturn.png" />
+    <Resource Include="Images\spaceBackg.png" />
     <Resource Include="Images\Sun.png" />
     <Resource Include="Images\Uranus.png" />
     <Resource Include="Images\Venus.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\spaceBackg.png" />
+    <Resource Include="Images\planetsBack.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BE\BE.csproj">
