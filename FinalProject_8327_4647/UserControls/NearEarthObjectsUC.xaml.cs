@@ -1,18 +1,7 @@
 ﻿using FinalProject_8327_4647.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FinalProject_8327_4647.UserControls
 {
@@ -34,8 +23,8 @@ namespace FinalProject_8327_4647.UserControls
 
         private void SearchHazardsBT_Click(object sender, RoutedEventArgs e)
         {
-            nearEarthVM.GetNearEarthObjects(hazardCB.IsChecked.Value);
-            dataGrid.ItemsSource = nearEarthVM.NearEarthObjects;
+            nearEarthVM.GetNearEarthObjects();
+            //dataGrid.ItemsSource = nearEarthVM.NearEarthObjects;
         }
 
         private void fromDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -46,6 +35,11 @@ namespace FinalProject_8327_4647.UserControls
         private void toDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             nearEarthVM.ToDate = DateTime.Parse(toDate.Text).ToString("yyyy-MM-dd");
+        }
+
+        private void hazardCB_Checked(object sender, RoutedEventArgs e)
+        {
+            nearEarthVM.HazardOnly = hazardCB.IsChecked.Value;
         }
     }
 }

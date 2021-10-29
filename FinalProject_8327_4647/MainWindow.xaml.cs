@@ -14,38 +14,38 @@ namespace FinalProject_8327_4647
         {
             InitializeComponent();
             DataContext = this;
-            //DoStuff1();
+            ImageDayCMD();
         }
-        public RelayCommand Cmd1 => new RelayCommand(DoStuff1);
-        public RelayCommand Cmd2 => new RelayCommand(DoStuff2);
-        public RelayCommand Cmd3 => new RelayCommand(DoStuff3);
-        public RelayCommand Cmd4 => new RelayCommand(DoStuff4);
-        public RelayCommand Cmd5 => new RelayCommand(DoStuff5);
+        public RelayCommand Cmd1 => new RelayCommand(ImageDayCMD);
+        public RelayCommand Cmd2 => new RelayCommand(PlanetsCMD);
+        public RelayCommand Cmd3 => new RelayCommand(ImageSearchCMD);
+        public RelayCommand Cmd4 => new RelayCommand(NearEarthObjectsCMD);
+        public RelayCommand Cmd5 => new RelayCommand(ExitCMD);
 
-        private void DoStuff1()
+        private void ImageDayCMD()
         {
-            DoStuff(new ImageDayUC());
-        }
-
-        private void DoStuff2()
-        {
-            DoStuff(new PlanetsProfiles());
+            DoCMD(new ImageDayUC());
         }
 
-        private void DoStuff3()
+        private void PlanetsCMD()
         {
-            DoStuff(new ImageSearchUC());
+            DoCMD(new PlanetsProfiles());
         }
-        private void DoStuff4()
+
+        private void ImageSearchCMD()
         {
-            DoStuff(new NearEarthObjectsUC());
+            DoCMD(new ImageSearchUC());
         }
-        private void DoStuff5()
+        private void NearEarthObjectsCMD()
+        {
+            DoCMD(new NearEarthObjectsUC());
+        }
+        private void ExitCMD()
         {
             Close();
         }
 
-        private void DoStuff(UIElement uc)
+        private void DoCMD(UIElement uc)
         {
             if (currentUserControl != null)
                 myGrid.Children.Remove(currentUserControl);

@@ -37,7 +37,7 @@
             <TextBlock Text="גודל מינימאלי" VerticalAlignment="Center"/>
             <TextBox x:Name="minSizeTB" Width="50" Text="{Binding MinSize}" VerticalAlignment="Center" />
             <TextBlock Text="מסוכן?" VerticalAlignment="Center"/>
-            <CheckBox x:Name="hazardCB" VerticalAlignment="Center" IsChecked="{Binding ElementName=HazardOnly,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+            <CheckBox x:Name="hazardCB" VerticalAlignment="Center" IsChecked="{Binding HazardOnly}"/>
             <TextBlock Text="מתאריך" VerticalAlignment="Center"/>
             <DatePicker x:Name="fromDate" Width="100" SelectedDate="{Binding FromDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="fromDate_SelectedDateChanged"/>
             <TextBlock Text="עד תאריך" VerticalAlignment="Center"/>
@@ -46,6 +46,6 @@
         </StackPanel>
         <DataGrid Name="dataGrid" Grid.Row="1" HorizontalAlignment="Stretch" Margin="50" GridLinesVisibility="Vertical" HeadersVisibility="All"
                   Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue" IsReadOnly="True"
-                  CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False"/>
+                  CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding NearEarthObjects}"/>
     </Grid>
 </UserControl>
