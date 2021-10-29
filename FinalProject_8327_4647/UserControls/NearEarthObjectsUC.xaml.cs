@@ -34,7 +34,7 @@ namespace FinalProject_8327_4647.UserControls
 
         private void SearchHazardsBT_Click(object sender, RoutedEventArgs e)
         {
-            nearEarthVM.GetNearEarthObjects();
+            nearEarthVM.GetNearEarthObjects(hazardCB.IsChecked.Value);
             dataGrid.ItemsSource = nearEarthVM.NearEarthObjects;
         }
 

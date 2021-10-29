@@ -25,13 +25,23 @@ namespace FinalProject_8327_4647.ViewModels
         private string fromDate;
         public string FromDate
         {
-            get { return fromDate; }
+            get
+            {
+                if (null != fromDate)
+                    return fromDate;
+                return DateTime.Now.ToString("MM/dd/yyyy");
+            }
             set { fromDate = value; }
         }
         private string toDate;
         public string ToDate
         {
-            get { return toDate; }
+            get
+            {
+                if (null != toDate)
+                    return toDate;
+                return DateTime.Now.ToString("MM/dd/yyyy");
+            }
             set { toDate = value; }
         }
 
@@ -56,16 +66,16 @@ namespace FinalProject_8327_4647.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void GetNearEarthObjects()
+        public void GetNearEarthObjects(bool hazard)
         {
             if (FromDate != null && ToDate != null)
             {
-                GetNearEarthObjects(FromDate, ToDate, HazardOnly, MinSize);
+                GetNearEarthObjects(FromDate, ToDate, hazard, MinSize);
             }
             else
             {
                 var nowDate = DateTime.Now.ToString("yyyy-MM-dd");
-                GetNearEarthObjects(nowDate, nowDate, HazardOnly, MinSize);
+                GetNearEarthObjects(nowDate, nowDate, hazard, MinSize);
             }
         }
 

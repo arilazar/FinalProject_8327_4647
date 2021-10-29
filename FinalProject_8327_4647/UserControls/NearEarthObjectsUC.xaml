@@ -13,6 +13,18 @@
 
     <UserControl.Resources>
         <local1:CheckBoxConverter x:Key="CBConverter"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -22,14 +34,15 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="0" Margin="10,10,50,10">
             <Button x:Name="searchHazardsBT" Content="חפש איומים" Click="SearchHazardsBT_Click"/>
-            <TextBlock Text="גודל מינימאלי"/>
-            <TextBox x:Name="minSizeTB" Width="50" Text="{Binding MinSize}"/>
-            <TextBlock Text="מסוכן?"/>
-            <CheckBox x:Name="hazardCB" IsChecked="{Binding Path=HazardOnly,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,Converter={StaticResource CBConverter}}"/>
-            <TextBlock Text="מתאריך"/>
-            <DatePicker x:Name="fromDate" SelectedDate="{Binding FromDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="fromDate_SelectedDateChanged"/>
-            <TextBlock Text="עד תאריך"/>
-            <DatePicker x:Name="toDate" SelectedDate="{Binding ToDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="toDate_SelectedDateChanged"/>
+            <TextBlock Text="גודל מינימאלי" VerticalAlignment="Center"/>
+            <TextBox x:Name="minSizeTB" Width="50" Text="{Binding MinSize}" VerticalAlignment="Center" />
+            <TextBlock Text="מסוכן?" VerticalAlignment="Center"/>
+            <CheckBox x:Name="hazardCB" VerticalAlignment="Center" IsChecked="{Binding ElementName=HazardOnly,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+            <TextBlock Text="מתאריך" VerticalAlignment="Center"/>
+            <DatePicker x:Name="fromDate" Width="100" SelectedDate="{Binding FromDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="fromDate_SelectedDateChanged"/>
+            <TextBlock Text="עד תאריך" VerticalAlignment="Center"/>
+            <DatePicker x:Name="toDate" Width="100" SelectedDate="{Binding ToDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="toDate_SelectedDateChanged"/>
+            <TextBlock Text="{Binding NearEarthObjects.Count, StringFormat='מספר האובייקטים: {0}'}" VerticalAlignment="Center"/>
         </StackPanel>
         <DataGrid Name="dataGrid" Grid.Row="1" HorizontalAlignment="Stretch" Margin="50" GridLinesVisibility="Vertical" HeadersVisibility="All"
                   Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue" IsReadOnly="True"

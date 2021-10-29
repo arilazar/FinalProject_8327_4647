@@ -16,9 +16,13 @@ namespace FinalProject_8327_4647.Models
         }
         public List<NEO> getNearEarthObject(string start, string end, bool hazard, int minSize)
         {
+            if (hazard)
+                return (from element in Task.Run(() => bLClass.getNearEarthObject(start, end)).Result
+                         where element.IsPotentiallyHazardousAsteroid == true
+                         && element.EstimatedDiameter > minSize
+                         select element).ToList();
             return (from element in Task.Run(() => bLClass.getNearEarthObject(start, end)).Result
-                    where element.IsPotentiallyHazardousAsteroid == hazard
-                    && element.EstimatedDiameter > minSize
+                    where element.EstimatedDiameter > minSize
                     select element).ToList();
         }
     }

@@ -60,13 +60,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="0"/>
         </Grid.ColumnDefinitions>
+        <!--<Grid x:Name="myGrid2" Panel.ZIndex="0" Grid.Column="0" Background="Black" Opacity="0"/>-->
         <!--<Grid x:Name="GridEdgeOfTheScreen" Grid.Column="1" Background="Black" HorizontalAlignment="Right" Opacity="0"  Width="5"/>-->
         <Grid x:Name="GridBackground"  Background="#55313131" Opacity="0"/>
-        <!--<Grid x:Name="myGrid2" Panel.ZIndex="0" Grid.Column="0" Background="Black" Opacity="0"/>-->
-
-        <Button x:Name="ButtonOpen" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" Height="30" Padding="0">
-            <materialDesign:PackIcon Kind="Menu" Foreground="#FF313131"/>
-        </Button>
         <Grid x:Name="GridMenu" Width="290"  Panel.ZIndex="2" HorizontalAlignment="Right" Margin="0 0 -250 0" Background="White" RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <TransformGroup>
@@ -76,10 +72,12 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Grid.RenderTransform>
-            <StackPanel>
-                <Image Height="140" Source="Assets/mountains.jpg" Stretch="Fill"/>
+
+            <materialDesign:PackIcon Kind="Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" Foreground="#FF313131" Style="{StaticResource iconStyle}"/>
+
+            <StackPanel Margin="0,200,0,0">
                 <ListView Foreground="#FF313131" FontFamily="Champagne &amp; Limousines" FontSize="18">
-                    <ListViewItem Height="45" Padding="0">
+                    <ListViewItem Height="45" Padding="0" Margin="0,0,0,5">
                         <StackPanel Orientation="Horizontal"  >
                             <materialDesign:PackIcon Kind="Image" Foreground="Red" Style="{StaticResource iconStyle}"/>
                             <TextBlock Text="תמונת היום" Margin="10">
@@ -89,7 +87,7 @@
                             </TextBlock>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="45" Padding="0">
+                    <ListViewItem Height="45" Padding="0" Margin="0,0,0,5">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Planet" Foreground="Blue" Style="{StaticResource iconStyle}"/>
                             <TextBlock Text="פרופיל נתוני פלנטות" Margin="10">
@@ -99,7 +97,7 @@
                             </TextBlock>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="45" Padding="0">
+                    <ListViewItem Height="45" Padding="0" Margin="0,0,0,5">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Search" Foreground="Green" Style="{StaticResource iconStyle}"/>
                             <TextBlock Text="חיפוש תמונות" Margin="10">
@@ -109,7 +107,7 @@
                             </TextBlock>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="45" Padding="0">
+                    <ListViewItem Height="45" Padding="0" Margin="0,0,0,5">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="HazardLights" Foreground="#FFD41515" Style="{StaticResource iconStyle}"/>
                             <TextBlock Text="אובייקטים סובבי ארץ" Margin="10">
@@ -119,7 +117,7 @@
                             </TextBlock>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="45" Padding="0">
+                    <ListViewItem Height="45" Padding="0" Margin="0,0,0,5">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ExitToApp" Foreground="#FFE6A701" Style="{StaticResource iconStyle}"/>
                             <TextBlock Text="יציאה" Margin="10">
