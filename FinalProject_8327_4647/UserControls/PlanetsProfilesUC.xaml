@@ -7,8 +7,15 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              x:Class="FinalProject_8327_4647.PlanetsProfiles"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                 xmlns:viewModel="clr-namespace:FinalProject_8327_4647.ViewModels" 
+
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" 
+                 d:DataContext="{d:DesignInstance Type=viewModel:PlanetsProfilesVM}">
+    <UserControl.Resources>
+        <viewModel:PlanetsProfilesVM x:Key="planetsProfVM"/>
+    </UserControl.Resources>
+    
 
     <Grid>
         <Grid.Resources >
@@ -24,8 +31,7 @@
                             <TextBlock>
                                  <Run Text="{Binding Name}" Foreground="White"/>
                                  <Run Text="   " />
-                                 <Run Text="{Binding Size}" Foreground="White"  />
-                                 <Run Text="   " />
+                               
                             </TextBlock>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
@@ -73,73 +79,72 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock x:Name="Name" Margin="5,0,0,0"> <Run Text="{Binding Name}" Foreground="Red"/>
-                        </TextBlock>
-                        <TextBlock x:Name="GeneralInfo"  Margin="5,0,0,0"></TextBlock>
+                        <TextBlock x:Name="Name" Margin="5,0,0,0"> <Run Text="{Binding Name}" Foreground="Red"/></TextBlock>
+                        <TextBlock x:Name="GeneralInfo"  Margin="5,0,0,0"> <Run Text="{Binding GeneralInfo}" /></TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Margin="8 24 8 0">
                         <TextBlock FontWeight="Bold">  מידע כללי</TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock >  קטגוריה</TextBlock>
-                            <TextBlock x:Name="Category" Margin="5,0,0,0"> <Run Text="{Binding Descrip.Category}" Foreground="Red"/></TextBlock>
+                            <TextBlock x:Name="Category" Margin="5,0,0,0"> <Run Text="{Binding Category}"/> </TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock >  מיקום</TextBlock>
-                            <TextBlock x:Name="Location" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="Location" Margin="5,0,0,0"> <Run Text="{Binding Location}" /> </TextBlock>
                         </StackPanel>
                         <TextBlock FontWeight="Bold">  מאפיינים מסלוליים</TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  מרחק ממוצע מהשמש</TextBlock>
-                            <TextBlock x:Name="AvgDistanceFromSun" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="AvgDistanceFromSun" Margin="5,0,0,0"> <Run Text="{Binding AvgDistanceFromSun}" /> </TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  זמן הקפה</TextBlock>
-                            <TextBlock x:Name="OrbitalPeriod" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="OrbitalPeriod" Margin="5,0,0,0"><Run Text="{Binding OrbitalPeriod}" /></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  מהירות מסלולית ממוצעת</TextBlock>
-                            <TextBlock x:Name="AvgOrbitalSpeed" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="AvgOrbitalSpeed" Margin="5,0,0,0"><Run Text="{Binding AvgOrbitalSpeed}" /></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  נטיית מסלול</TextBlock>
-                            <TextBlock x:Name="Inclination" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="Inclination" Margin="5,0,0,0"><Run Text="{Binding Inclination}" /></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  מספר ירחים</TextBlock>
-                            <TextBlock x:Name="Satellites" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="Satellites" Margin="5,0,0,0"><Run Text="{Binding Satellites}" /></TextBlock>
                         </StackPanel>
                         <TextBlock FontWeight="Bold">  מאפיינים פיזיים</TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  רדיוס בקו המשווה</TextBlock>
-                            <TextBlock x:Name="Radius" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="Radius" Margin="5,0,0,0"><Run Text="{Binding Radius}" /></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  שטח פנים</TextBlock>
-                            <TextBlock x:Name="SurfaceArea" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="SurfaceArea" Margin="5,0,0,0"><Run Text="{Binding SurfaceArea}" /></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  מסה</TextBlock>
-                            <TextBlock x:Name="Mass" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="Mass" Margin="5,0,0,0"><Run Text="{Binding Mass}" /></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  צפיפות ממוצעת</TextBlock>
-                            <TextBlock x:Name="density" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="density" Margin="5,0,0,0"><Run Text="{Binding Density}" /></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  זמן סיבוב עצמי</TextBlock>
-                            <TextBlock x:Name="RotationPeriod" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="RotationPeriod" Margin="5,0,0,0"><Run Text="{Binding RotationPeriod}" /></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  מהירות סיבוב עצמי</TextBlock>
-                            <TextBlock x:Name="RotationSpeed" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="RotationSpeed" Margin="5,0,0,0"><Run Text="{Binding RotationSpeed}" /></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  נטיית ציר הסיבוב</TextBlock>
-                            <TextBlock x:Name="AxialTilt" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="AxialTilt" Margin="5,0,0,0"><Run Text="{Binding AxialTilt}" /></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>  ממוצע טמפרטורת פני השטח</TextBlock>
-                            <TextBlock x:Name="AvgSurfaceTemp" Margin="5,0,0,0"></TextBlock>
+                            <TextBlock x:Name="AvgSurfaceTemp" Margin="5,0,0,0"><Run Text="{Binding AvgSurfaceTemp}" /></TextBlock>
                         </StackPanel>
                     </StackPanel>
                     <!--<StackPanel HorizontalAlignment="Right" Grid.Row="2" Orientation="Horizontal" Margin="8">

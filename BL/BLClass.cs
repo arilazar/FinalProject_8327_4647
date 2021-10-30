@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,11 @@ using DL;
 
 namespace BL
 {
-    public class BLClass
+    public class BLClass //: INotifyPropertyChanged
     {
         DLClass myDL = new DLClass();
+        StarService StarServ = new StarService();
+
 
         public async Task<APOD> getAPOD()
         {
@@ -47,5 +50,29 @@ namespace BL
             //        returnList.Add(element);
             //return returnList;
         }
+
+        public ObservableCollection<Star> GetPlanets()
+        {
+            return new ObservableCollection<Star>(StarServ.GetPlanets());
+        }
+
+        #region "INotifyPropertyChanged members"
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        //This routine is called each time a property value has been set.
+        //This will cause an event to notify WPF via data-bindingthat a change has occurred.
+        private void OnPropertyChanged(string propertyName)
+        {
+
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+
+        }
+        #endregion
+
     }
 }

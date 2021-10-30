@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,6 +16,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Data;
+using FinalProject_8327_4647.ViewModels;
+using BE;
+
 
 namespace FinalProject_8327_4647
 {
@@ -23,68 +27,75 @@ namespace FinalProject_8327_4647
     /// </summary>
     public partial class PlanetsProfiles : UserControl
     {
+        private PlanetsProfilesVM planetsProfilesVM;
+
         public PlanetsProfiles()
         {
+
+            planetsProfilesVM = new PlanetsProfilesVM();
+            DataContext = planetsProfilesVM;
             InitializeComponent();
-            this.MyCarousel.ItemsSource = GetStars();
+           // planetsProfilesVM.GetPlanets();
+
+           this.MyCarousel.ItemsSource = planetsProfilesVM.GetPlanets();
         }
 
-        static ObservableCollection<Star> GetStars()
-        {
-            ObservableCollection<Star> stars = new ObservableCollection<Star>();
+        //static ObservableCollection<Star> GetStars()
+        //{
+        //    ObservableCollection<Star> stars = new ObservableCollection<Star>();
 
-            Star star = new Star();
-            star.Name = "כוכב חמה - מרקורי";
-            star.Size = "700";
-            star.ImageUrl = @"\Images\Mercury.png";
-            stars.Add(star);
+        //    Star star = new Star();
+        //    star.Name = "כוכב חמה - מרקורי";
+        //    star.Size = "700";
+        //    star.ImageUrl = @"\Images\Mercury.png";
+        //    stars.Add(star);
 
-            star = new Star();
-            star.Name = "נוגה - וונוס";
-            star.Size = "100";
-            star.ImageUrl = @"\Images\Venus.png";
-            stars.Add(star);
+        //    star = new Star();
+        //    star.Name = "נוגה - וונוס";
+        //    star.Size = "100";
+        //    star.ImageUrl = @"\Images\Venus.png";
+        //    stars.Add(star);
 
-            star = new Star();
-            star.Name = "כדור הארץ";
-            star.Size = "400";
-            star.ImageUrl = @"\Images\Earth.png";
-            stars.Add(star);
+        //    star = new Star();
+        //    star.Name = "כדור הארץ";
+        //    star.Size = "400";
+        //    star.ImageUrl = @"\Images\Earth.png";
+        //    stars.Add(star);
 
-            star = new Star();
-            star.Name = "מאדים - מארס";
-            star.Size = "600";
-            star.ImageUrl = @"\Images\Mars.png";
-            stars.Add(star);
+        //    star = new Star();
+        //    star.Name = "מאדים - מארס";
+        //    star.Size = "600";
+        //    star.ImageUrl = @"\Images\Mars.png";
+        //    stars.Add(star);
 
-            star = new Star();
-            star.Name = "צדק - יופיטר";
-            star.Size = "8000";
-            star.ImageUrl = @"\Images\Jupiter.png";
-            stars.Add(star);
+        //    star = new Star();
+        //    star.Name = "צדק - יופיטר";
+        //    star.Size = "8000";
+        //    star.ImageUrl = @"\Images\Jupiter.png";
+        //    stars.Add(star);
 
-            star = new Star();
-            star.Name = "שבתאי - סטורנוס";
-            star.Size = "900";
-            star.ImageUrl = @"\Images\Saturn.png";
-            stars.Add(star);
+        //    star = new Star();
+        //    star.Name = "שבתאי - סטורנוס";
+        //    star.Size = "900";
+        //    star.ImageUrl = @"\Images\Saturn.png";
+        //    stars.Add(star);
 
-            star = new Star();
-            star.Name = "אורון - אורנוס";
-            star.Size = "50000";
-            star.ImageUrl = @"\Images\Uranus.png";
-            stars.Add(star);
+        //    star = new Star();
+        //    star.Name = "אורון - אורנוס";
+        //    star.Size = "50000";
+        //    star.ImageUrl = @"\Images\Uranus.png";
+        //    stars.Add(star);
 
-            star = new Star();
-            star.Name = "רהב - נפטון";
-            star.Size = "10000";
-            star.ImageUrl = @"\Images\Neptune.png";
-            star.Descrip = new Star.Description();
-            star.Descrip.Category = "32";
-            stars.Add(star);
+        //    star = new Star();
+        //    star.Name = "רהב - נפטון";
+        //    star.Size = "10000";
+        //    star.ImageUrl = @"\Images\Neptune.png";
+        //    star.Descrip = new Star.Description();
+        //    star.Descrip.Category = "32";
+        //    stars.Add(star);
 
-            return stars;
-        }
+        //    return stars;
+        //}
 
         /*click evant on the carusel item*/
         private void RadCarousel_SelectionChanged(object sender, SelectionChangeEventArgs e)
