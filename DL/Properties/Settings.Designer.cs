@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinalProject_8327_4647.Properties {
+namespace DL.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -28,9 +28,9 @@ namespace FinalProject_8327_4647.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=C:\\Users\\aril8\\Source\\Repos\\FinalProjec" +
             "t_8327_4647\\BE\\PlanetsDbService.mdf;Integrated Security=True;User Instance=True")]
-        public string PlanetsDb {
+        public string PlanetsDbServiceConnectionString {
             get {
-                return ((string)(this["PlanetsDb"]));
+                return ((string)(this["PlanetsDbServiceConnectionString"]));
             }
         }
     }

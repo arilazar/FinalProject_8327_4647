@@ -10,7 +10,7 @@ namespace DL
 
     public class StarService
     {
-        PlanetsDB_8327Entities2 ObjContext;
+        /*PlanetsDB_8327Entities2 ObjContext;
 
         public StarService()
         {
@@ -53,7 +53,7 @@ namespace DL
                 throw ex;
             }
             return ObjStarList;
-        }
+        }*/
         /*
         public bool Add(EmployeeDTO objNewEmployee)
         {
