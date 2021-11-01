@@ -9,7 +9,7 @@ namespace DL
 {
     public class StarService
     {
-        PlanetsDB_8327Entities2 ObjContext;
+        /*PlanetsDB_8327Entities2 ObjContext;
 
         public StarService()
         {
@@ -87,15 +87,14 @@ namespace DL
                 throw ex;
             }
             return ObjStarList;
-        }
-    }
-    /*
-    public bool Add(EmployeeDTO objNewEmployee)
-    {
-        bool IsAdded = false;
-        //Age must be between 21 and 58
-        if (objNewEmployee.Age < 21 || objNewEmployee.Age > 58)
-            throw new ArgumentException("Invalid age limit for employee");
+        }*/
+        /*
+        public bool Add(EmployeeDTO objNewEmployee)
+        {
+            bool IsAdded = false;
+            //Age must be between 21 and 58
+            if (objNewEmployee.Age < 21 || objNewEmployee.Age > 58)
+                throw new ArgumentException("Invalid age limit for employee");
 
         try
         {

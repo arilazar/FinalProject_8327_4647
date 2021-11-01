@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinalProject_8327_4647.Properties {
+namespace BE.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -26,11 +26,21 @@ namespace FinalProject_8327_4647.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=C:\\Users\\aril8\\Source\\Repos\\FinalProjec" +
-            "t_8327_4647\\BE\\PlanetsDbService.mdf;Integrated Security=True;User Instance=True")]
-        public string PlanetsDb {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=PlanetsDB_8327;Integrated Security=True")]
+        public string PlanetsDB_8327ConnectionString {
             get {
-                return ((string)(this["PlanetsDb"]));
+                return ((string)(this["PlanetsDB_8327ConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\PlanetsDbService.mdf;In" +
+            "tegrated Security=True;User Instance=True")]
+        public string PlanetsDB {
+            get {
+                return ((string)(this["PlanetsDB"]));
             }
         }
     }

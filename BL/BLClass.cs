@@ -44,9 +44,15 @@ namespace BL
             return await myDL.getNearEarthObject(start, end);
         }
 
-        public ObservableCollection<Star> GetPlanets()
+        //first virsion
+        //public ObservableCollection<Star> GetPlanets()
+        //{
+        //    return new ObservableCollection<Star>(StarServ.GetPlanets());
+        //}
+
+        public List<Planets> GetSolarSystem()
         {
-            return new ObservableCollection<Star>(StarServ.GetPlanets());
+            return myDL.GetSolarSysytem();
         }
 
         #region "INotifyPropertyChanged members"

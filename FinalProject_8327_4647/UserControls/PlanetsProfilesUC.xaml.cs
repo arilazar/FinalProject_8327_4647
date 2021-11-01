@@ -35,8 +35,9 @@ namespace FinalProject_8327_4647
             DataContext = planetsProfilesVM;
             InitializeComponent();
 
-            MyCarousel.ItemsSource = planetsProfilesVM.StarsList;
+           //this.MyCarousel.ItemsSource = planetsProfilesVM.GetPlanets();
         }
+
 
 
         /*click evant on the carusel item*/
@@ -51,7 +52,7 @@ namespace FinalProject_8327_4647
             var carousel = e.OriginalSource as RadCarouselPanel;
 
             var topContainer = carousel.TopContainer;
-            var item = (topContainer as CarouselItem).DataContext as Star;
+            var item = (topContainer as CarouselItem).DataContext as Planets;
             if (item != null)
             {
                 Dispatcher.BeginInvoke(new Action(() => GridDiscription.DataContext = item)

@@ -12,27 +12,50 @@ namespace FinalProject_8327_4647.ViewModels
 {
     class PlanetsProfilesVM
     {
-        BLClass bLClass;
+        private Models.PlanetsProfilesModel model;
+
+        private List<Planets> _solarSystemPlanets;
+        public List<Planets> SolarSystemPlanets
+        {
+            get { return _solarSystemPlanets; }
+            set { _solarSystemPlanets = value; }
+        }
+
+        public PlanetsProfilesVM()
+        {
+            model = new Models.PlanetsProfilesModel();
+            SolarSystemPlanets = model.GetSolarSystem();
+        }
+
+        //first virsion
+        /*   BLClass bLClass;
 
         public PlanetsProfilesVM()
         {
             bLClass = new BLClass();
         }
 
-        private ObservableCollection<Star> _starsList;
-        public ObservableCollection<Star> StarsList
-        {
-            get { return _starsList; }
-            set
-            {
-                _starsList = value;
-                OnPropertyChanged("StarsList");
-            }
-        }
-        public void GetPlanets()
-        {
-            StarsList = new ObservableCollection<Star>(bLClass.GetPlanets());
-        }
+           private ObservableCollection<Star> _starsList;
+           public ObservableCollection<Star> StarsList
+           {
+               get { return _starsList; }
+               set
+               {
+                   _starsList = value;
+                   OnPropertyChanged("StarsList");
+               }
+           }
+
+
+           //public void GetPlanets()
+           //{
+           //    StarsList = new ObservableCollection<Star>(bLClass.GetPlanets());
+           //}
+
+           public ObservableCollection<Star> GetPlanets()
+           {
+               return new ObservableCollection<Star>(bLClass.GetPlanets());
+           }*/
 
         #region "INotifyPropertyChanged members"
 

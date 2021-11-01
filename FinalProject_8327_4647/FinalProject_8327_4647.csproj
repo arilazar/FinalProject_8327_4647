@@ -89,6 +89,7 @@
     <Compile Include="Commands\ButtonClickCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Models\NearEarthModel.cs" />
+    <Compile Include="Models\PlanetsProfilesModel.cs" />
     <Compile Include="UserControls\ImageSearchUC.xaml.cs">
       <DependentUpon>ImageSearchUC.xaml</DependentUpon>
     </Compile>
