@@ -1,6 +1,9 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using FinalProject_8327_4647.ViewModels;
 
 namespace FinalProject_8327_4647.UserControls
@@ -11,20 +14,26 @@ namespace FinalProject_8327_4647.UserControls
     public partial class ImageSearchUC : UserControl
     {
         private ImageSearchVM searchVM;
+
         public ImageSearchUC()
         {
             searchVM = new ImageSearchVM();
             DataContext = searchVM;
             InitializeComponent();
+            //confidenceCB.SelectedIndex = 0;
         }
 
         private void searchBT_Click(object sender, RoutedEventArgs e)
         {
-            var thread = new Thread(() =>
+            Task.Run(() => searchVM.GetSearchResults());
+        }
+
+        private void searchTB_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
             {
-                searchVM.GetSearchResults(searchVM.SearchVal);
-            });
-            thread.Start();
+                searchBT_Click(this, new RoutedEventArgs());
+            }
         }
     }
 }

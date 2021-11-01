@@ -13,9 +13,9 @@ namespace FinalProject_8327_4647
             bLClass = new BLClass();
         }
 
-        public Task<APOD> getApod()
+        public async Task<APOD> getApod()
         {
-            return bLClass.getAPOD();
+            return await bLClass.getAPOD();
         }
     }
 }

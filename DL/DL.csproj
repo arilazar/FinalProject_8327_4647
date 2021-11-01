@@ -235,7 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DLClass.cs" />
-    <Compile Include="FilterImages.cs" />
     <Compile Include="Planets.cs">
       <DependentUpon>PlanetsDBModel.tt</DependentUpon>
     </Compile>

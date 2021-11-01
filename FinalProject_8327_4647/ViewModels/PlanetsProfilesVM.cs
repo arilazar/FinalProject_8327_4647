@@ -14,7 +14,8 @@ namespace FinalProject_8327_4647.ViewModels
     {
         BLClass bLClass;
 
-        public PlanetsProfilesVM(){
+        public PlanetsProfilesVM()
+        {
             bLClass = new BLClass();
         }
 
@@ -28,16 +29,9 @@ namespace FinalProject_8327_4647.ViewModels
                 OnPropertyChanged("StarsList");
             }
         }
-
-
-        //public void GetPlanets()
-        //{
-        //    StarsList = new ObservableCollection<Star>(bLClass.GetPlanets());
-        //}
-
-        public ObservableCollection<Star> GetPlanets()
+        public void GetPlanets()
         {
-            return new ObservableCollection<Star>(bLClass.GetPlanets());
+            StarsList = new ObservableCollection<Star>(bLClass.GetPlanets());
         }
 
         #region "INotifyPropertyChanged members"
@@ -57,6 +51,5 @@ namespace FinalProject_8327_4647.ViewModels
 
         }
         #endregion
-
     }
 }

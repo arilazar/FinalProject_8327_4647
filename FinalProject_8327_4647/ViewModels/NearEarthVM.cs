@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace FinalProject_8327_4647.ViewModels
 {
@@ -17,7 +18,20 @@ namespace FinalProject_8327_4647.ViewModels
             model = new NearEarthModel();
         }
 
-        public int MinSize { get; set; } = 0;
+        private int minSize = 0;
+
+        public int MinSize
+        {
+            get { return minSize; }
+            set {
+                if (value == minSize)
+                    return;
+                minSize = value;
+                OnPropertyChanged("nearEarthObjects");
+            }
+        }
+
+
 
         private bool hazardOnly;
         public bool HazardOnly
@@ -55,18 +69,23 @@ namespace FinalProject_8327_4647.ViewModels
             set { toDate = value; }
         }
 
-        private ObservableCollection<NEO> nearEarthObjects;
+        private ObservableCollection<NEO> nearEarthObjects = new ObservableCollection<NEO>();
 
         public ObservableCollection<NEO> NearEarthObjects
         {
             get
             {
-                if (HazardOnly && nearEarthObjects != null)
+
+
+                if (HazardOnly)
                     return new ObservableCollection<NEO>(from item in nearEarthObjects
-                                                         where item.IsPotentiallyHazardousAsteroid == hazardOnly
+                                                         where item.IsPotentiallyHazardous == hazardOnly
+                                                         && item.EstimatedDiameter >= MinSize
                                                          select item);
                 else
-                    return nearEarthObjects;
+                    return new ObservableCollection<NEO>(from item in nearEarthObjects
+                                                         where item.EstimatedDiameter >= MinSize
+                                                         select item);
             }
             set
             {
@@ -86,22 +105,13 @@ namespace FinalProject_8327_4647.ViewModels
 
         public void GetNearEarthObjects()
         {
-            if (FromDate != null && ToDate != null)
-            {
-                GetNearEarthObjects(FromDate, ToDate, MinSize);
-            }
-            else
+            if (FromDate == null || ToDate == null)
             {
                 var nowDate = DateTime.Now.ToString("yyyy-MM-dd");
-                GetNearEarthObjects(nowDate, nowDate, MinSize);
+                fromDate = nowDate;
+                toDate = nowDate;
             }
-        }
-
-        public void GetNearEarthObjects(string start, string end, int minSize)
-        {
-            Thread t = new Thread(() =>
-              NearEarthObjects = new ObservableCollection<NEO>(model.getNearEarthObject(start, end, minSize)));
-            t.Start();
+            NearEarthObjects = new ObservableCollection<NEO>(model.getNearEarthObject(FromDate, ToDate, MinSize).Result);
         }
     }
 }

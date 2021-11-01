@@ -8,14 +8,31 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <viewModel:ImageDayVM x:Key="imageDayVM" />
+        <Style x:Key="AnnotationStyle" TargetType="TextBlock">
+            <Setter Property="Background" Value="#70FFFFFF" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="30"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#CCFFFFFF" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
-    
-    <StackPanel Orientation="Vertical" >
-        <TextBlock Name="ImageName" HorizontalAlignment="Left"
-                   TextWrapping="Wrap"
-                   Text="{Binding Title}"
-                   VerticalAlignment="Top"
-                   Margin="5"></TextBlock>
-        <Image Source="{Binding UrlImage}"/>
-    </StackPanel>
+ 
+    <Grid>
+        <Border BorderBrush="Black" BorderThickness="10" Margin="0,0,40,0">
+        <Image Source="{Binding UrlImage}" />
+        </Border>
+
+        <TextBlock Name="ImageName" Style="{StaticResource AnnotationStyle}"
+                   Text="{Binding Title}"/>
+    </Grid>
+
+
 </UserControl>

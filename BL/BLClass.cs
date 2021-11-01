@@ -10,11 +10,10 @@ using DL;
 
 namespace BL
 {
-    public class BLClass //: INotifyPropertyChanged
+    public class BLClass
     {
         DLClass myDL = new DLClass();
         StarService StarServ = new StarService();
-
 
         public async Task<APOD> getAPOD()
         {
@@ -43,12 +42,6 @@ namespace BL
         public async Task<List<NEO>> getNearEarthObject(string start, string end)
         {
             return await myDL.getNearEarthObject(start, end);
-            //var count = jsonValue.ElementCount;
-            //List<NearEarthObject> returnList = new List<NearEarthObject>();
-            //foreach (KeyValuePair<string, NearEarthObject[]> day in jsonValue.NearEarthObjects)
-            //    foreach (var element in day.Value)
-            //        returnList.Add(element);
-            //return returnList;
         }
 
         public ObservableCollection<Star> GetPlanets()

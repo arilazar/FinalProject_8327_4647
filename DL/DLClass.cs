@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DL
@@ -41,8 +42,17 @@ namespace DL
 
         public async Task<APOD> getAPOD()
         {
-            string url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
-            string responseBody = await httpClient.GetStringAsync(url);
+            string APIKEY = "dKGbkafEfGBA8WM7V5LwguoCAIoP9DfhITdKbb59";
+            string url = "https://api.nasa.gov/planetary/apod?api_key=" + APIKEY;
+            string responseBody;
+            try
+            {
+                responseBody = await httpClient.GetStringAsync(url);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
             APOD myDeserializedClass = JsonConvert.DeserializeObject<APOD>(responseBody);
             return myDeserializedClass;
         }

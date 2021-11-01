@@ -35,7 +35,7 @@
         <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="0" Margin="10,10,50,10">
             <Button x:Name="searchHazardsBT" Content="חפש איומים" Click="SearchHazardsBT_Click"/>
             <TextBlock Text="גודל מינימאלי" VerticalAlignment="Center"/>
-            <TextBox x:Name="minSizeTB" Width="50" Text="{Binding MinSize}" VerticalAlignment="Center" />
+            <TextBox x:Name="minSizeTB" Width="50" Text="{Binding MinSize, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
             <TextBlock Text="מסוכן?" VerticalAlignment="Center"/>
             <CheckBox x:Name="hazardCB" VerticalAlignment="Center" IsChecked="{Binding HazardOnly}"/>
             <TextBlock Text="מתאריך" VerticalAlignment="Center"/>
@@ -44,8 +44,18 @@
             <DatePicker x:Name="toDate" Width="100" SelectedDate="{Binding ToDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="toDate_SelectedDateChanged"/>
             <TextBlock Text="{Binding NearEarthObjects.Count, StringFormat='מספר האובייקטים: {0}'}" VerticalAlignment="Center"/>
         </StackPanel>
-        <DataGrid Name="dataGrid" Grid.Row="1" HorizontalAlignment="Stretch" Margin="50" GridLinesVisibility="Vertical" HeadersVisibility="All"
+        <DataGrid Name="dataGrid" Grid.Row="1" HorizontalAlignment="Stretch" ColumnWidth="*" Margin="50" GridLinesVisibility="Vertical" HeadersVisibility="All"
                   Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue" IsReadOnly="True"
-                  CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding NearEarthObjects}"/>
+                  CanUserResizeColumns="False" CanUserReorderColumns="False" TextBlock.FontSize="14" TextBlock.TextAlignment="Center" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding NearEarthObjects}" AutoGenerateColumns="True" AutoGeneratingColumn="dataGrid_AutoGeneratingColumn">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Azure"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+        </DataGrid>
     </Grid>
 </UserControl>

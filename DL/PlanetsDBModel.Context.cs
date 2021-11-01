@@ -12,19 +12,18 @@ namespace DL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class PlanetsDB_8327Entities2 : DbContext
     {
-        public PlanetsDB_8327Entities2()
-            : base("name=PlanetsDB_8327Entities2")
+        public PlanetsDB_8327Entities2() : base("name=PlanetsDB_8327Entities2")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Planets> Planets { get; set; }
     }
 }
