@@ -24,27 +24,38 @@ namespace FinalProject_8327_4647.ViewModels
             }
             set
             {
-                if (null == value)
-                    return;
                 searchImageCollection = value;
                 OnPropertyChanged();
             }
         }
 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public string SearchVal { get; set; }
+
+        private double confidenceVal;
+
+        public double ConfidenceVal
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return confidenceVal; }
+            set
+            {
+                if (value != confidenceVal)
+                {
+                    confidenceVal = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public async void GetSearchResults()
+        {
+            SearchImageCollection = new ObservableCollection<SearchImage>(await model.GetSearchImages(SearchVal, ConfidenceVal));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string SearchVal { get; set; }
-        public double ConfidenceVal { get; set; }
-
-
-        public void GetSearchResults(string search)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            SearchImageCollection = new ObservableCollection<SearchImage>(model.GetSearchImages(search, ConfidenceVal).Result);
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

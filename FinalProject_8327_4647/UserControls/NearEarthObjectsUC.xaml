@@ -4,48 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FinalProject_8327_4647.UserControls"
-             xmlns:local1="clr-namespace:FinalProject_8327_4647.Converters"
+             xmlns:converter="clr-namespace:FinalProject_8327_4647.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:viewModel="clr-namespace:FinalProject_8327_4647.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              d:DataContext="{d:DesignInstance Type=viewModel:NearEarthVM}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <local1:CheckBoxConverter x:Key="CBConverter"/>
-        <Style TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
+        <converter:CheckBoxConverter x:Key="CBConverter"/>
+        <converter:ConverterterToVisible x:Key="visibleConverter"/>
+        <Style BasedOn="{StaticResource neoTextbox}" TargetType="{x:Type TextBox}" />
+        <Style BasedOn="{StaticResource neoTextBlock}" TargetType="{x:Type TextBlock}" />
+
     </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions >
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Row="0" Margin="10,10,50,10">
-            <Button x:Name="searchHazardsBT" Content="חפש איומים" Click="SearchHazardsBT_Click"/>
-            <TextBlock Text="גודל מינימאלי" VerticalAlignment="Center"/>
-            <TextBox x:Name="minSizeTB" Width="50" Text="{Binding MinSize}" VerticalAlignment="Center" />
-            <TextBlock Text="מסוכן?" VerticalAlignment="Center"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Minimum size" VerticalAlignment="Center" TextAlignment="Center"/>
+            <TextBox x:Name="minSizeTB" Width="50" Text="{Binding MinSize, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+            <TextBlock Text="Hazard?" VerticalAlignment="Center"/>
             <CheckBox x:Name="hazardCB" VerticalAlignment="Center" IsChecked="{Binding HazardOnly}"/>
-            <TextBlock Text="מתאריך" VerticalAlignment="Center"/>
+            <TextBlock Text="From date" VerticalAlignment="Center"/>
             <DatePicker x:Name="fromDate" Width="100" SelectedDate="{Binding FromDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="fromDate_SelectedDateChanged"/>
-            <TextBlock Text="עד תאריך" VerticalAlignment="Center"/>
+            <TextBlock Text="To date" VerticalAlignment="Center"/>
             <DatePicker x:Name="toDate" Width="100" SelectedDate="{Binding ToDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="toDate_SelectedDateChanged"/>
-            <TextBlock Text="{Binding NearEarthObjects.Count, StringFormat='מספר האובייקטים: {0}'}" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding NearEarthObjects.Count, StringFormat='Num of objects : {0}'}" VerticalAlignment="Center"/>
+            <Button x:Name="searchHazardsBT" Content="Find hazards" Click="SearchHazardsBT_Click" FontSize="18" Margin="20"/>
         </StackPanel>
-        <DataGrid Name="dataGrid" Grid.Row="1" HorizontalAlignment="Stretch" Margin="50" GridLinesVisibility="Vertical" HeadersVisibility="All"
+        <ProgressBar Name="ImageProgressBar" Grid.Row="1" Width="150" VerticalAlignment="Center" Panel.ZIndex="1" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True"
+                     Visibility="{Binding NearEarthObjects.Count,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,Converter={StaticResource visibleConverter}}" />
+        <DataGrid Name="dataGrid" Grid.Row="1" HorizontalAlignment="Stretch" ColumnWidth="*" Margin="50,0,50,50" GridLinesVisibility="Vertical" HeadersVisibility="All"
                   Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue" IsReadOnly="True"
-                  CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding NearEarthObjects}"/>
+                  CanUserResizeColumns="False" CanUserReorderColumns="False" TextBlock.FontSize="14" TextBlock.TextAlignment="Center" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding NearEarthObjects}" AutoGenerateColumns="True" AutoGeneratingColumn="dataGrid_AutoGeneratingColumn">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="BorderThickness" Value="3"/>
+                    <Setter Property="BorderBrush" Value="Azure"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+        </DataGrid>
     </Grid>
 </UserControl>

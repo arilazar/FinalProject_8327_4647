@@ -5,28 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModel="clr-namespace:FinalProject_8327_4647.ViewModels" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-
+             xmlns:converter="clr-namespace:FinalProject_8327_4647.Converters"
              d:DataContext="{d:DesignInstance Type=viewModel:ImageSearchVM}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <converter:ConverterterToVisible x:Key="visibleConverter"/>
         <viewModel:ImageSearchVM x:Key="searchVM"/>
     </UserControl.Resources>
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Images/planetsBack.png"  />
         </Grid.Background>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
             <RowDefinition Height="5"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border BorderBrush="SkyBlue" BorderThickness="2" Width="500" Background="Transparent" Margin="10">
-            <StackPanel Grid.Row="0" Height="100"  Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" FlowDirection="LeftToRight">
-                <TextBox Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Name="searchTB" Width="150" Text="{Binding SearchVal}" Margin="10,0,0,50" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.HelperText="Image Name "/>
-                <ComboBox Name="confidenceTB" Foreground="White" FontSize="16" Width="125" Text="{Binding ConfidenceVal}"  materialDesign:HintAssist.Hint="Reliability" Margin="30,0,0,56"
-                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.HelperText="Search reliability percentage">
-                    <ComboBoxItem Foreground="White">0</ComboBoxItem>
+            <StackPanel Grid.Row="0" Height="100"  Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" FlowDirection="RightToLeft">
+                <TextBox Foreground="White" KeyDown="searchTB_KeyDown" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Name="searchTB" Width="150" Text="{Binding SearchVal, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,50" materialDesign:HintAssist.Hint="שם" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.HelperText="מלא שם תמונה "/>
+                <ComboBox Name="confidenceCB" Foreground="White" FontSize="16" Width="110" Text="{Binding ConfidenceVal, UpdateSourceTrigger=PropertyChanged}"  materialDesign:HintAssist.Hint="אמינות" Margin="30,0,0,56"
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedIndex="0" materialDesign:HintAssist.HelperText="בחר אחוז אמינות לחיפוש">
+                    <ComboBoxItem>0</ComboBoxItem>
                     <ComboBoxItem>10</ComboBoxItem>
                     <ComboBoxItem>20</ComboBoxItem>
                     <ComboBoxItem>30</ComboBoxItem>
@@ -40,12 +41,13 @@
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="MaterialDesignPaper" Color="Black"/>
                     </ComboBox.Resources>
-                </ComboBox>
                 <Button x:Name="searchBT" Content="Search" Margin="30,10,10,40" RenderTransformOrigin="0.506,0.51" Click="searchBT_Click"/>
             </StackPanel>
-        </Border>
+        <ProgressBar Name="LoadingProgressBar" Grid.Row="1" Width="150" VerticalAlignment="Center" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True"
+                     Visibility="{Binding SearchImageCollection.Count,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,Converter={StaticResource visibleConverter}}" />
         <Separator Grid.Row="1" Foreground="SkyBlue"/>
-        <ListView Grid.Row="2" ItemsSource="{Binding SearchImageCollection}" HorizontalAlignment="Stretch" Margin="15,0,15,15" >
+        <ListView x:Name="imagesList" Grid.Row="2" ItemsSource="{Binding SearchImageCollection}" HorizontalAlignment="Stretch" Margin="15" >
+
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4" HorizontalAlignment="Stretch"/>
@@ -55,7 +57,8 @@
                 <DataTemplate>
                     <Border Background="Black" BorderBrush="SkyBlue" BorderThickness="1">
                         <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                            <Image Source="{Binding Url}" Width="300" Height="300" Stretch="Uniform" />
+                                                        <Image Source="{Binding Url}" Width="300" Height="300" Stretch="Uniform" />
+
                             <TextBlock Text="{Binding Title}" Margin="5"  TextWrapping="WrapWithOverflow"  Background="Black" Foreground="White" FontWeight="Bold" TextAlignment="Center" FontSize="14" Width="300" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
                         </StackPanel>
                     </Border>
@@ -63,6 +66,4 @@
             </ListView.ItemTemplate>
         </ListView>
     </Grid>
-
-
 </UserControl>

@@ -1,9 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.ComponentModel;
 
 namespace BE
 {
@@ -16,13 +12,25 @@ namespace BE
             Name = name;
             AbsoluteMagnitudeH = absoluteMagnitudeH;
             EstimatedDiameter = estimatedDiameter;
-            IsPotentiallyHazardousAsteroid = isPotentiallyHazardousAsteroid;
+            IsPotentiallyHazardous = isPotentiallyHazardousAsteroid;
         }
+
+        [DisplayName("Date")]
         public string Date { get; set; }
+
+        [DisplayName("ID")]
         public long Id { get; set; }
+
+        [DisplayName("Name")]
         public string Name { get; set; }
+
+        [DisplayName("Absolute magnitude high")]
         public double AbsoluteMagnitudeH { get; set; }
+
+        [DisplayName("Estimated diameter")]
         public double EstimatedDiameter { get; set; }
-        public bool IsPotentiallyHazardousAsteroid { get; set; }
+
+        [DisplayName("Potentially hazardous")]
+        public bool IsPotentiallyHazardous { get; set; }
     }
 }

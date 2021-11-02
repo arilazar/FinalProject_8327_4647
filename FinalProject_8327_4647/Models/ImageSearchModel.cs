@@ -14,9 +14,9 @@ namespace FinalProject_8327_4647.ViewModels
             this.myBL = new BLClass();
         }
 
-        public Task<List<SearchImage>> GetSearchImages(string SearchVal, double confidence)
+        public async Task<List<SearchImage>> GetSearchImages(string SearchVal, double confidence)
         {
-            return myBL.GetSearchResults(SearchVal, confidence);
+            return await myBL.GetSearchResults(SearchVal, confidence);
         }
     }
 }

@@ -235,14 +235,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DLClass.cs" />
-    <Compile Include="FilterImages.cs" />
+    <Compile Include="PlanetsDBModel.Context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="StarService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BE\BE.csproj">

@@ -31,8 +31,8 @@ namespace FinalProject_8327_4647
 
         public PlanetsProfiles()
         {
-
             planetsProfilesVM = new PlanetsProfilesVM();
+            Task.Run(() => planetsProfilesVM.GetSolarSystem());
             DataContext = planetsProfilesVM;
             InitializeComponent();
         }

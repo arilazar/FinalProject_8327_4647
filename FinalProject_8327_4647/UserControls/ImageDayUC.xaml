@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="FinalProject_8327_4647.ImageDayUC"
+﻿<UserControl xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  x:Class="FinalProject_8327_4647.ImageDayUC"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,13 +9,30 @@
     <UserControl.Resources>
         <viewModel:ImageDayVM x:Key="imageDayVM" />
     </UserControl.Resources>
-    
-    <StackPanel Orientation="Vertical" >
-        <TextBlock Name="ImageName" HorizontalAlignment="Left"
-                   TextWrapping="Wrap"
-                   Text="{Binding Title}"
-                   VerticalAlignment="Top"
-                   Margin="5"></TextBlock>
-        <Image Source="{Binding UrlImage}"/>
-    </StackPanel>
+
+    <Grid>
+        <Grid.Background>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Grid ClipToBounds="True">
+                        <Image Source="{Binding UrlImage}">
+                            <Image.Effect>
+                                <BlurEffect Radius="70"/>
+                            </Image.Effect>
+                        </Image>
+                    </Grid>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Grid.Background>
+
+        <Border BorderBrush="Black" BorderThickness="10" Margin="0,0,40,0">
+            <StackPanel>
+                <telerik:ProgressPresenter />
+            <Image Source="{Binding UrlImage}" />
+            </StackPanel>
+        </Border>
+
+        <TextBlock Name="ImageName" Style="{StaticResource AnnotationStyle}"
+                   Text="{Binding Title}"/>
+    </Grid>
 </UserControl>
