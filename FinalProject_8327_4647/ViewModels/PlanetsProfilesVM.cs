@@ -27,35 +27,6 @@ namespace FinalProject_8327_4647.ViewModels
             SolarSystemPlanets = model.GetSolarSystem();
         }
 
-        //first virsion
-        /*   BLClass bLClass;
-
-           public PlanetsProfilesVM(){
-               bLClass = new BLClass();
-           }
-
-           private ObservableCollection<Star> _starsList;
-           public ObservableCollection<Star> StarsList
-           {
-               get { return _starsList; }
-               set
-               {
-                   _starsList = value;
-                   OnPropertyChanged("StarsList");
-               }
-           }
-
-
-           //public void GetPlanets()
-           //{
-           //    StarsList = new ObservableCollection<Star>(bLClass.GetPlanets());
-           //}
-
-           public ObservableCollection<Star> GetPlanets()
-           {
-               return new ObservableCollection<Star>(bLClass.GetPlanets());
-           }*/
-
         #region "INotifyPropertyChanged members"
 
         public event PropertyChangedEventHandler PropertyChanged;

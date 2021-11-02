@@ -35,23 +35,6 @@ namespace FinalProject_8327_4647
             planetsProfilesVM = new PlanetsProfilesVM();
             DataContext = planetsProfilesVM;
             InitializeComponent();
-           // planetsProfilesVM.GetPlanets();
-
-           //this.MyCarousel.ItemsSource = planetsProfilesVM.GetPlanets();
-        }
-
-
-
-        /*click evant on the carusel item*/
-        private void RadCarousel_SelectionChanged(object sender, SelectionChangeEventArgs e)
-        {
-            //var carousel = e.OriginalSource as RadCarousel;
-            //var selected = carousel.SelectedItem as Star;
-
-            //if (selected != null)
-            //{
-            //    MessageBox.Show(selected.Name);
-            //}
         }
 
         /*topItem Changed evant of the carusel*/
@@ -64,11 +47,21 @@ namespace FinalProject_8327_4647
             if (item != null)
             {
 
-                Dispatcher.BeginInvoke(new Action(() => GridDiscription.DataContext = item)
-                , System.Windows.Threading.DispatcherPriority.Normal);
+                //Text = " km&#x00B2;"
+               // public string Insert(int startIndex, string value)
 
-                //Dispatcher.BeginInvoke(new Action(() => MessageBox.Show(item.Name)),
-                //System.Windows.Threading.DispatcherPriority.Normal);
+               
+               
+                GridDiscription.DataContext = item;
+                var strList = item.SurfaceArea.Split('^');
+                SurfaceTxtBlock.Text = strList[0];
+                if (strList.Length > 1)
+                    txtBlock1.Text = strList[1];
+                strList = item.Mass.Split('^');
+                MassTxtBlock.Text = strList[0];
+                txtBlock2.Text = strList[1];
+
+
 
             }
         }

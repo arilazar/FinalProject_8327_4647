@@ -266,13 +266,6 @@ namespace DL
             return JsonConvert.DeserializeObject<TagResult>(response.Content);
         }
 
-        public void getFromFirebaseStorage(string fileName)
-        {
-
-            string path = "https://console.firebase.google.com/u/0/project/stars-tracking/storage/stars-tracking.appspot.com/files/";
-            string uri = $"{path}{fileName}.png?alt=media";
-        }
-
         public async Task<List<NEO>> getNearEarthObject(string start, string end)
         {
             string APIKEY = "dKGbkafEfGBA8WM7V5LwguoCAIoP9DfhITdKbb59";
