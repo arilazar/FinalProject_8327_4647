@@ -13,7 +13,6 @@ namespace BL
     public class BLClass
     {
         DLClass myDL = new DLClass();
-        StarService StarServ = new StarService();
 
         public async Task<APOD> getAPOD()
         {
@@ -21,10 +20,24 @@ namespace BL
         }
         public async Task<List<SearchImage>> GetSearchResults(string search, double confidence)
         {
-            List<SearchImage> allImagesList = await myDL.GetSearchImages(search);
-            List<SearchImage> filteredImagesList = new List<SearchImage>();
+            ImageSearchResult searchResult = await myDL.GetSearchImages(search);
+            var allImagesList = new List<SearchImage>();
+
+            foreach (Item item in searchResult.collection.items)
+            {
+                if (item.links != null)
+                {
+                    allImagesList.Add(new SearchImage(item.data[0].title,
+                        item.data[0].description,
+                        item.links.FirstOrDefault().href));
+                }
+            }
+
             if (confidence <= 30)
                 return allImagesList;
+
+            List<SearchImage> filteredImagesList = new List<SearchImage>();
+
             Parallel.ForEach(allImagesList, image =>
             {
                 TagResult tag = myDL.getTag(image.Url);
@@ -32,16 +45,33 @@ namespace BL
                     if (tag.result.tags.Any((x) => x.confidence >= confidence && x.tag.en == "planet"))
                         filteredImagesList.Add(image);
             });
-            if (filteredImagesList.Count == 0)
-                return allImagesList;
-            Console.WriteLine("filter success!");
-            Console.WriteLine("תמונות שנשארו לאחר סינון " + filteredImagesList.Count);
+            //if (filteredImagesList.Count == 0)
+            //    return allImagesList;
             return filteredImagesList;
         }
 
         public async Task<List<NEO>> getNearEarthObject(string start, string end)
         {
-            return await myDL.getNearEarthObject(start, end);
+            NearEarth nearEarthObject = await myDL.getNearEarthObject(start, end);
+            var x = (from KeyValuePair<string, NearEarthObject[]> day in nearEarthObject.NearEarthObjects
+                     from NearEarthObject nearEarthObj in day.Value
+                     select nearEarthObj).ToList();
+            var neoList = new List<NEO>();
+
+            foreach (KeyValuePair<string, NearEarthObject[]> day in nearEarthObject.NearEarthObjects)
+            {
+                foreach (NearEarthObject neo in day.Value)
+                {
+                    neoList.Add(new NEO(
+                        day.Key,
+                        neo.Id,
+                        neo.Name,
+                        neo.AbsoluteMagnitudeH,
+                        neo.EstimatedDiameter.Meters.EstimatedDiameterMin,
+                        neo.IsPotentiallyHazardousAsteroid));
+                }
+            }
+            return neoList;
         }
 
         //first virsion
@@ -50,9 +80,9 @@ namespace BL
         //    return new ObservableCollection<Star>(StarServ.GetPlanets());
         //}
 
-        public List<Planets> GetSolarSystem()
+        public async Task<List<Planets>> GetSolarSystem()
         {
-            return myDL.GetSolarSysytem();
+            return await myDL.GetSolarSysytem();
         }
 
         #region "INotifyPropertyChanged members"

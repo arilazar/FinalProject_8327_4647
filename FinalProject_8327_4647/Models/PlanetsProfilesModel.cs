@@ -16,9 +16,9 @@ namespace FinalProject_8327_4647.Models
             bl = new BLClass();
         }
 
-        public List<Planets> GetSolarSystem()
+        public async Task<List<Planets>> GetSolarSystem()
         {
-            return bl.GetSolarSystem();
+            return await bl.GetSolarSystem();
         }
     }
 }

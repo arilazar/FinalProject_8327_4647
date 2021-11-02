@@ -31,8 +31,6 @@ namespace FinalProject_8327_4647.ViewModels
             }
         }
 
-
-
         private bool hazardOnly;
         public bool HazardOnly
         {
@@ -75,8 +73,6 @@ namespace FinalProject_8327_4647.ViewModels
         {
             get
             {
-
-
                 if (HazardOnly)
                     return new ObservableCollection<NEO>(from item in nearEarthObjects
                                                          where item.IsPotentiallyHazardous == hazardOnly
@@ -103,7 +99,7 @@ namespace FinalProject_8327_4647.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void GetNearEarthObjects()
+        public async void GetNearEarthObjects()
         {
             if (FromDate == null || ToDate == null)
             {
@@ -111,7 +107,7 @@ namespace FinalProject_8327_4647.ViewModels
                 fromDate = nowDate;
                 toDate = nowDate;
             }
-            NearEarthObjects = new ObservableCollection<NEO>(model.getNearEarthObject(FromDate, ToDate, MinSize).Result);
+            NearEarthObjects = new ObservableCollection<NEO>(await model.getNearEarthObject(FromDate, ToDate, MinSize));
         }
     }
 }

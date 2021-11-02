@@ -32,18 +32,9 @@ namespace FinalProject_8327_4647
         public PlanetsProfiles()
         {
             planetsProfilesVM = new PlanetsProfilesVM();
+            Task.Run(() => planetsProfilesVM.GetSolarSystem());
             DataContext = planetsProfilesVM;
             InitializeComponent();
-
-           //this.MyCarousel.ItemsSource = planetsProfilesVM.GetPlanets();
-        }
-
-
-
-        /*click evant on the carusel item*/
-        private void RadCarousel_SelectionChanged(object sender, SelectionChangeEventArgs e)
-        {
-
         }
 
         /*topItem Changed evant of the carusel*/
@@ -54,10 +45,7 @@ namespace FinalProject_8327_4647
             var topContainer = carousel.TopContainer;
             var item = (topContainer as CarouselItem).DataContext as Planets;
             if (item != null)
-            {
-                Dispatcher.BeginInvoke(new Action(() => GridDiscription.DataContext = item)
-                , System.Windows.Threading.DispatcherPriority.Normal);
-            }
+                GridDiscription.DataContext = item;
         }
     }
 }

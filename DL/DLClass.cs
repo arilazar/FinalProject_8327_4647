@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
@@ -15,40 +15,93 @@ namespace DL
     {
         private HttpClient httpClient;
 
-        private const string BaseUrl = "https://images-api.nasa.gov/search?q=";
-        private const string EndUrl = "&media_type=image";
+        private const string IMAGGA_API_KEY = "acc_c282840c1b7255d";
+        private const string IMAGGA_API_SECRET = "d8fb6f7ef0ff13f918f61f9fa7cc8053";
+        private const string NASA_APIKEY = "dKGbkafEfGBA8WM7V5LwguoCAIoP9DfhITdKbb59";
+
         public DLClass()
         {
             httpClient = new HttpClient();
+            //initializeDB();
+        }
 
-            new Thread(() =>
+        public async Task<List<Planets>> GetSolarSysytem()
+        {
+            using (var ctx = new PlanetsDB())
+            {
+                return await ctx.PlanetsDataSet.ToListAsync();
+            }
+        }
+
+        public async Task<APOD> getAPOD()
+        {
+            string url = "https://api.nasa.gov/planetary/apod?api_key=" + NASA_APIKEY;
+            string responseBody;
+            responseBody = await httpClient.GetStringAsync(url);
+            APOD myDeserializedClass = JsonConvert.DeserializeObject<APOD>(responseBody);
+            return myDeserializedClass;
+        }
+
+        public async Task<ImageSearchResult> GetSearchImages(string search)
+        {
+            const string BaseUrl = "https://images-api.nasa.gov/search?q=";
+            const string EndUrl = "&media_type=image";
+            string response = await httpClient.GetStringAsync(BaseUrl + search + EndUrl);
+            return JsonConvert.DeserializeObject<ImageSearchResult>(response);
+        }
+
+        public async Task<NearEarth> getNearEarthObject(string start, string end)
+        {
+            string uri = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={start}&end_date={end}&api_key={NASA_APIKEY}";
+            string responseBody = await httpClient.GetStringAsync(uri);
+            return NearEarth.FromJson(responseBody);
+        }
+
+        public TagResult getTag(string imageUrl)
+        {
+            RestClient client = new RestClient("https://api.imagga.com/v2/tags");
+            string basicAuthValue = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", IMAGGA_API_KEY, IMAGGA_API_SECRET)));
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            request.AddParameter("image_url", imageUrl);
+            request.AddHeader("Authorization", String.Format("Basic {0}", basicAuthValue));
+            IRestResponse response = client.Execute(request);
+            return JsonConvert.DeserializeObject<TagResult>(response.Content);
+        }
+
+        private void initializeDB()
+        {
+            Task.Run(() =>
             {
                 using (var dbcontext = new PlanetsDB())
                 {
+                    dbcontext.PlanetsDataSet.RemoveRange(dbcontext.PlanetsDataSet.ToList());
+                    dbcontext.SaveChanges();
                     if (dbcontext.PlanetsDataSet.ToList().Count == 0)
                     {
                         var link = "https://firebasestorage.googleapis.com/v0/b/stars-tracking-63e30.appspot.com/o/";
 
                         //Venus
-                        dbcontext.PlanetsDataSet.Add(new Planets() {
-                             Name = "Venus",
-                             GeneralInfo = "Venus is the second planet far from the Sun. Venus' orbit is the closest to Earth's orbit, and its size is close to Earth's size. The most striking feature of Venus is the immense heat that prevails on its surface, more than any other planet in the solar system.",
-                             Category = "Terrestrial planet",
-                             Location = "Inner Solar System",
-                             AvgDistanceFromSun = "108,208,926",
-                             OrbitalPeriod = "224.7",
-                             AvgOrbitalSpeed = "35.02",
-                             Inclination = "3.39471",
-                             Satellites = "0",
-                             Radius = "6,052",
-                             SurfaceArea = "4.6×10^8",
-                             Mass = "4.8685×10^24",
-                             Density = "5.204",
-                             RotationPeriod = "117",
-                             RotationSpeed = "0.0018",
-                             AxialTilt = "2.64",
-                             AvgSurfaceTemp = "436.8",
-                             ImageUrl = $"{link}Venus.png?alt=media&token=208b3b65-9eb5-47b1-b07e-3ce9d05bea88"
+                        dbcontext.PlanetsDataSet.Add(new Planets()
+                        {
+                            Name = "Venus",
+                            GeneralInfo = "Venus is the second planet far from the Sun. Venus' orbit is the closest to Earth's orbit, and its size is close to Earth's size. The most striking feature of Venus is the immense heat that prevails on its surface, more than any other planet in the solar system.",
+                            Category = "Terrestrial planet",
+                            Location = "Inner Solar System",
+                            AvgDistanceFromSun = "108,208,926",
+                            OrbitalPeriod = "224.7",
+                            AvgOrbitalSpeed = "35.02",
+                            Inclination = "3.39471",
+                            Satellites = "0",
+                            Radius = "6,052",
+                            SurfaceArea = "4.6×10^8",
+                            Mass = "4.8685×10^24",
+                            Density = "5.204",
+                            RotationPeriod = "117",
+                            RotationSpeed = "0.0018",
+                            AxialTilt = "2.64",
+                            AvgSurfaceTemp = "436.8",
+                            ImageUrl = $"{link}Venus.png?alt=media&token=208b3b65-9eb5-47b1-b07e-3ce9d05bea88"
                         });
                         //Mercury
                         dbcontext.PlanetsDataSet.Add(new Planets()
@@ -207,108 +260,7 @@ namespace DL
                         dbcontext.SaveChanges();
                     }
                 }
-            })
-            .Start();
+            });
         }
-
-        public List<Planets> GetSolarSysytem()
-        {
-            using (var ctx = new PlanetsDB())
-            {
-                return ctx.PlanetsDataSet.ToList();
-            }
-        }
-
-        public async Task<List<SearchImage>> GetSearchImages(string search)
-        {
-            string response = await httpClient.GetStringAsync(BaseUrl + search + EndUrl);
-            ImageSearchResult searchResult = JsonConvert.DeserializeObject<ImageSearchResult>(response);
-            var imagesList = new List<SearchImage>();
-
-            foreach (Item item in searchResult.collection.items)
-            {
-                if (item.links != null)
-                {
-                    imagesList.Add(new SearchImage(item.data[0].title,
-                        item.data[0].description,
-                        item.links.FirstOrDefault().href));
-                }
-            }
-            return imagesList;
-        }
-
-        public async Task<APOD> getAPOD()
-        {
-            string APIKEY = "dKGbkafEfGBA8WM7V5LwguoCAIoP9DfhITdKbb59";
-            string url = "https://api.nasa.gov/planetary/apod?api_key=" + APIKEY;
-            string responseBody;
-            try
-            {
-                responseBody = await httpClient.GetStringAsync(url);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            APOD myDeserializedClass = JsonConvert.DeserializeObject<APOD>(responseBody);
-            return myDeserializedClass;
-        }
-
-        public TagResult getTag(string imageUrl)
-        {
-            string apiKey = "acc_c282840c1b7255d";
-            string apiSecret = "d8fb6f7ef0ff13f918f61f9fa7cc8053";
-            //string authorization = "Basic YWNjX2MyODI4NDBjMWI3MjU1ZDpkOGZiNmY3ZWYwZmYxM2Y5MThmNjFmOWZhN2NjODA1Mw==";
-
-            RestClient client = new RestClient("https://api.imagga.com/v2/tags");
-            //string imageUrl = "https://docs.imagga.com/static/images/docs/sample/japan-605234_1280.jpg";
-            string basicAuthValue = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", apiKey, apiSecret)));
-
-            client.Timeout = -1;
-
-            var request = new RestRequest(Method.GET);
-            request.AddParameter("image_url", imageUrl);
-            request.AddHeader("Authorization", String.Format("Basic {0}", basicAuthValue));
-
-            IRestResponse response = client.Execute(request);
-
-            return JsonConvert.DeserializeObject<TagResult>(response.Content);
-        }
-
-        public void getFromFirebaseStorage(string fileName)
-        {
-
-            string path = "https://console.firebase.google.com/u/0/project/stars-tracking/storage/stars-tracking.appspot.com/files/";
-            string uri = $"{path}{fileName}.png?alt=media";
-        }
-
-        public async Task<List<NEO>> getNearEarthObject(string start, string end)
-        {
-            string APIKEY = "dKGbkafEfGBA8WM7V5LwguoCAIoP9DfhITdKbb59";
-            string uri = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={start}&end_date={end}&api_key={APIKEY}";
-            string responseBody = await httpClient.GetStringAsync(uri);
-
-            NearEarth nearEarth = NearEarth.FromJson(responseBody);
-            var x = (from KeyValuePair<string, NearEarthObject[]> day in nearEarth.NearEarthObjects
-                     from NearEarthObject nearEarthObj in day.Value
-                     select nearEarthObj).ToList();
-            var neoList = new List<NEO>();
-
-            foreach (KeyValuePair<string, NearEarthObject[]> day in nearEarth.NearEarthObjects)
-            {
-                foreach (NearEarthObject neo in day.Value)
-                {
-                    neoList.Add(new NEO(
-                        day.Key,
-                        neo.Id,
-                        neo.Name,
-                        neo.AbsoluteMagnitudeH,
-                        neo.EstimatedDiameter.Meters.EstimatedDiameterMin,
-                        neo.IsPotentiallyHazardousAsteroid));
-                }
-            }
-            return neoList;
-        }
-
     }
 }

@@ -7,15 +7,8 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              x:Class="FinalProject_8327_4647.PlanetsProfiles"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                 xmlns:viewModel="clr-namespace:FinalProject_8327_4647.ViewModels" 
-
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" 
-                 d:DataContext="{d:DesignInstance Type=viewModel:PlanetsProfilesVM}">
-    <UserControl.Resources>
-        <viewModel:PlanetsProfilesVM x:Key="planetsProfVM"/>
-    </UserControl.Resources>
-    
+             d:DesignHeight="450" d:DesignWidth="800" >
 
     <Grid>
         <Grid.Resources >
@@ -90,7 +83,7 @@
         </Grid>
 
         <Grid x:Name="GridCarusel">
-            <telerik:RadCarousel x:Name="MyCarousel" ItemsSource="{Binding SolarSystemPlanets}" CanUserSelect="False" SelectionChanged="RadCarousel_SelectionChanged"  ItemTemplate="{StaticResource customItemTemplate}" HorizontalScrollBarVisibility="Hidden">
+            <telerik:RadCarousel x:Name="MyCarousel" ItemsSource="{Binding SolarSystemPlanets}" CanUserSelect="False" ItemTemplate="{StaticResource customItemTemplate}" HorizontalScrollBarVisibility="Hidden">
                 <telerik:RadCarousel.Background>
                     <ImageBrush ImageSource="/Images/spaceBackg.png"/>
                 </telerik:RadCarousel.Background>

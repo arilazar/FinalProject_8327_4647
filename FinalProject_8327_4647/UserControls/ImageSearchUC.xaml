@@ -5,10 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModel="clr-namespace:FinalProject_8327_4647.ViewModels" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converter="clr-namespace:FinalProject_8327_4647.Converters"
              d:DataContext="{d:DesignInstance Type=viewModel:ImageSearchVM}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <converter:ConverterterToVisible x:Key="visibleConverter"/>
         <viewModel:ImageSearchVM x:Key="searchVM"/>
     </UserControl.Resources>
     <Grid>
@@ -42,7 +44,10 @@
                 <Button x:Name="searchBT" Content="חיפוש" Margin="30,10,10,40" RenderTransformOrigin="0.506,0.51" Click="searchBT_Click"/>
             </StackPanel>
         </Border>
-        <ListView Grid.Row="1" ItemsSource="{Binding SearchImageCollection}" HorizontalAlignment="Stretch" Margin="15" >
+        <ProgressBar Name="LoadingProgressBar" Grid.Row="1" Width="150" VerticalAlignment="Center" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True"
+                     Visibility="{Binding SearchImageCollection.Count,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,Converter={StaticResource visibleConverter}}" />
+       
+        <ListView x:Name="imagesList" Grid.Row="1" ItemsSource="{Binding SearchImageCollection}" HorizontalAlignment="Stretch" Margin="15" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4" HorizontalAlignment="Stretch"/>

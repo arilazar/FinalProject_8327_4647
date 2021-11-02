@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using FinalProject_8327_4647.ViewModels;
 
@@ -20,7 +21,6 @@ namespace FinalProject_8327_4647.UserControls
             searchVM = new ImageSearchVM();
             DataContext = searchVM;
             InitializeComponent();
-            //confidenceCB.SelectedIndex = 0;
         }
 
         private void searchBT_Click(object sender, RoutedEventArgs e)

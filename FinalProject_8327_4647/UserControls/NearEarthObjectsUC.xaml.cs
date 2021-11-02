@@ -22,6 +22,7 @@ namespace FinalProject_8327_4647.UserControls
             InitializeComponent();
             fromDate.DisplayDate = DateTime.Now;
             toDate.DisplayDate = DateTime.Now;
+            Task.Run(() => nearEarthVM.GetNearEarthObjects());
         }
 
         private void SearchHazardsBT_Click(object sender, RoutedEventArgs e)
@@ -32,11 +33,23 @@ namespace FinalProject_8327_4647.UserControls
         private void fromDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             nearEarthVM.FromDate = DateTime.Parse(fromDate.Text).ToString("yyyy-MM-dd");
+            //if (toDate != null)
+            //{
+            //    var x = DateTime.Now.Ticks;
+            //    var y = (DateTime)fromDate.SelectedDate;
+            //    var z = ((DateTime)fromDate.SelectedDate).AddDays(7).Ticks;
+            //    var a = Math.Min(x, z);
+            //    toDate.DisplayDateEnd = new DateTime(a);
+
+            //    toDate.DisplayDateEnd = new DateTime(Math.Min(((DateTime)fromDate.SelectedDate).AddDays(7).Ticks, DateTime.Now.Ticks));
+            //}
         }
 
         private void toDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             nearEarthVM.ToDate = DateTime.Parse(toDate.Text).ToString("yyyy-MM-dd");
+            //if (fromDate != null)
+            //    fromDate.DisplayDateEnd = new DateTime(Math.Min(((DateTime)toDate.SelectedDate).AddDays(-7).Ticks, DateTime.Now.Ticks));
         }
 
         private void hazardCB_Checked(object sender, RoutedEventArgs e)
