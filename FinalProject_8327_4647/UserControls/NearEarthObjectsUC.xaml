@@ -38,8 +38,7 @@
             <TextBlock Text="{Binding NearEarthObjects.Count, StringFormat='Num of objects : {0}'}" VerticalAlignment="Center"/>
             <Button x:Name="searchHazardsBT" Content="Find hazards" Click="SearchHazardsBT_Click" FontSize="18" Margin="20"/>
         </StackPanel>
-        <ProgressBar Name="ImageProgressBar" Grid.Row="1" Width="150" VerticalAlignment="Center" Panel.ZIndex="1" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True"
-                     Visibility="{Binding NearEarthObjects.Count,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,Converter={StaticResource visibleConverter}}" />
+        <ProgressBar Name="LoadingProgressBar" Grid.Row="1" Width="150" VerticalAlignment="Center" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Visibility="Hidden"/>
         <DataGrid Name="dataGrid" Grid.Row="1" HorizontalAlignment="Stretch" ColumnWidth="*" Margin="50,0,50,50" GridLinesVisibility="Vertical" HeadersVisibility="All"
                   Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue" IsReadOnly="True"
                   CanUserResizeColumns="False" CanUserReorderColumns="False" TextBlock.FontSize="14" TextBlock.TextAlignment="Center" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding NearEarthObjects}" AutoGenerateColumns="True" AutoGeneratingColumn="dataGrid_AutoGeneratingColumn">

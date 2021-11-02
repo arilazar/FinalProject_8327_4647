@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using FinalProject_8327_4647.ViewModels;
+using FinalProject_8327_4647.Converters;
 
 namespace FinalProject_8327_4647.UserControls
 {
@@ -25,6 +26,15 @@ namespace FinalProject_8327_4647.UserControls
 
         private void searchBT_Click(object sender, RoutedEventArgs e)
         {
+            Binding b = new Binding
+            {
+                Source = searchVM,
+                Path = new PropertyPath("SearchImageCollection.Count"),
+                Mode = BindingMode.OneWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                Converter = new ConverterterToVisible()
+            };
+            BindingOperations.SetBinding(LoadingProgressBar, VisibilityProperty, b);
             Task.Run(() => searchVM.GetSearchResults());
         }
 

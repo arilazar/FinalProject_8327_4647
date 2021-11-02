@@ -44,9 +44,7 @@
                 <Button x:Name="searchBT" Content="חיפוש" Margin="30,10,10,40" RenderTransformOrigin="0.506,0.51" Click="searchBT_Click"/>
             </StackPanel>
         </Border>
-        <ProgressBar Name="LoadingProgressBar" Grid.Row="1" Width="150" VerticalAlignment="Center" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True"
-                     Visibility="{Binding SearchImageCollection.Count,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,Converter={StaticResource visibleConverter}}" />
-       
+        <ProgressBar Name="LoadingProgressBar" Grid.Row="1" Width="150" VerticalAlignment="Center" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Visibility="Hidden"/>
         <ListView x:Name="imagesList" Grid.Row="1" ItemsSource="{Binding SearchImageCollection}" HorizontalAlignment="Stretch" Margin="15" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

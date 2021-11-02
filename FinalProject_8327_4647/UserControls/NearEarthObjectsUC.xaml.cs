@@ -1,10 +1,12 @@
-﻿using FinalProject_8327_4647.ViewModels;
+﻿using FinalProject_8327_4647.Converters;
+using FinalProject_8327_4647.ViewModels;
 using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace FinalProject_8327_4647.UserControls
 {
@@ -22,11 +24,18 @@ namespace FinalProject_8327_4647.UserControls
             InitializeComponent();
             fromDate.DisplayDate = DateTime.Now;
             toDate.DisplayDate = DateTime.Now;
-            Task.Run(() => nearEarthVM.GetNearEarthObjects());
         }
 
         private void SearchHazardsBT_Click(object sender, RoutedEventArgs e)
         {
+            Binding b = new Binding
+            {
+                Source = nearEarthVM,
+                Path = new PropertyPath("SearchImageCollection.Count"),
+                Mode = BindingMode.OneWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                Converter = new ConverterterToVisible()
+            };
             Task.Run(() => nearEarthVM.GetNearEarthObjects());
         }
 
