@@ -45,7 +45,25 @@ namespace FinalProject_8327_4647
             var topContainer = carousel.TopContainer;
             var item = (topContainer as CarouselItem).DataContext as Planets;
             if (item != null)
+            {
+
+                //Text = " km&#x00B2;"
+               // public string Insert(int startIndex, string value)
+
+               
+               
                 GridDiscription.DataContext = item;
+                var strList = item.SurfaceArea.Split('^');
+                SurfaceTxtBlock.Text = strList[0];
+                if (strList.Length > 1)
+                    txtBlock1.Text = strList[1];
+                strList = item.Mass.Split('^');
+                MassTxtBlock.Text = strList[0];
+                txtBlock2.Text = strList[1];
+
+
+
+            }
         }
     }
 }

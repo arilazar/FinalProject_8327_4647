@@ -22,7 +22,7 @@ namespace DL
         public DLClass()
         {
             httpClient = new HttpClient();
-            //initializeDB();
+            initializeDB();
         }
 
         public async Task<List<Planets>> GetSolarSysytem()
@@ -262,5 +262,8 @@ namespace DL
                 }
             });
         }
+
+      
+
     }
 }

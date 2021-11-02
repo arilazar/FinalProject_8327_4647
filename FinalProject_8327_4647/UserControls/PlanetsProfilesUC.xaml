@@ -1,15 +1,23 @@
 ﻿<UserControl
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FinalProject_8327_4647"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-             x:Class="FinalProject_8327_4647.PlanetsProfiles"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" >
-
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:FinalProject_8327_4647"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        x:Class="FinalProject_8327_4647.PlanetsProfiles"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewModel="clr-namespace:FinalProject_8327_4647.ViewModels" 
+        mc:Ignorable="d" 
+        d:DesignHeight="450" d:DesignWidth="800" >
+    <UserControl.Resources>
+        <Style x:Key="DiscriptionTextStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontFamily" Value="Champagne &amp; Limousines"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Margin" Value="1"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.Resources >
             <DataTemplate x:Key="customItemTemplate">
@@ -18,69 +26,78 @@
                     <TextBlock Margin="100,0,0,0"><Run Text="{Binding Name}" FontSize="20" Foreground="White" /></TextBlock>
                 </StackPanel>
             </DataTemplate>
-            <LinearGradientBrush x:Key="Carousel_ItemInnerBorder_Selected" EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF282828"/>
-                <GradientStop Color="#FF5F5F5F" Offset="1"/>
-            </LinearGradientBrush>
             <Style TargetType="telerik:CarouselItem">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="telerik:CarouselItem">
-                            <Border x:Name="CarouselItemBackground">
+                            <Border>
                                 <ContentPresenter/>
                             </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <!--<Setter TargetName="CarouselItemBackground" Property="BorderBrush" Value="{StaticResource Carousel_ItemInnerBorder_Selected}"/>-->
-                                </Trigger>
-                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
         </Grid.Resources>
 
-        <Grid x:Name="GridDiscription" Width="700" Height="400"  Panel.ZIndex="2"  Margin="-40,0,0,400" Background="White" RenderTransformOrigin="0.5,0.5">
-            <materialDesign:Card FlowDirection="LeftToRight">
-                
-                <StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Margin="5" FontWeight="Bold" FontSize="20"> <Run Text="{Binding Name}" /></TextBlock>
-                        <TextBlock Margin="5" FontSize="18" TextWrapping="WrapWithOverflow"> <Run Text="{Binding GeneralInfo}" /></TextBlock>
-                    </StackPanel>
-                    <Separator/>
-                    <Grid Margin="5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Vertical" Grid.Column="0" HorizontalAlignment="Center">
-                            <TextBlock FontWeight="Bold">General Information</TextBlock>
-                            <TextBlock>Category: <Run Text="{Binding Category}"/></TextBlock>
-                            <TextBlock>Location: <Run Text="{Binding Location}" /></TextBlock>
-                            <TextBlock FontWeight="Bold">Orbital characteristics</TextBlock>
-                            <TextBlock>Average distance from the sun: <Run Text="{Binding AvgDistanceFromSun}"/> km</TextBlock>
-                            <TextBlock>Orbital period: <Run Text="{Binding OrbitalPeriod}" /> days</TextBlock>
-                            <TextBlock>Average orbital speed: <Run Text="{Binding AvgOrbitalSpeed}"/> km/s</TextBlock>
-                            <TextBlock>Inclination: <Run Text="{Binding Inclination}" />°</TextBlock>
-                            <TextBlock>Satellites: <Run Text="{Binding Satellites}" /></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
-                            <TextBlock FontWeight="Bold">Physical characteristics</TextBlock>
-                            <TextBlock>Mean radius: <Run Text="{Binding Radius}" /> km</TextBlock>
-                            <TextBlock>Surface area: <Run Text="{Binding SurfaceArea}" /><Run Text=" km&#x00B2;" /></TextBlock>
-                            <TextBlock>Mass: <Run Text="{Binding Mass}" /> kg</TextBlock>
-                            <TextBlock>Mean density: <Run Text="{Binding Density}" /><Run Text=" g/cm&#x00B3;" /></TextBlock>
-                            <TextBlock>Rotation period: <Run Text="{Binding RotationPeriod}" /> days</TextBlock>
-                            <TextBlock>Rotation Speed: <Run Text="{Binding RotationSpeed}" /> km/s</TextBlock>
-                            <TextBlock>Axial tilt: <Run Text="{Binding AxialTilt}" />°</TextBlock>
-                            <TextBlock>Average surface temperature: <Run Text="{Binding AvgSurfaceTemp}" /> °C</TextBlock>
-                        </StackPanel>
-                    </Grid>
+        <Border Background="White" BorderThickness="5" Margin="-40,0,0,400" Width="760" Height="400" CornerRadius="25" Panel.ZIndex="2">
+            <Grid x:Name="GridDiscription"   Background="Transparent"  RenderTransformOrigin="0.5,0.5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Row="0">
+                    <TextBlock Margin="0,0,0,0" FontWeight="Bold" FontSize="30" HorizontalAlignment="Center" Text="{Binding Name}" ></TextBlock>
+                    <TextBlock Margin="5" FontSize="20" TextWrapping="WrapWithOverflow" TextAlignment="Center" Text="{Binding GeneralInfo}"></TextBlock>
                 </StackPanel>
+                <Separator Grid.Row="1"/>
+                <Grid Margin="5" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical" Grid.Column="0" HorizontalAlignment="Center" >
+                        <StackPanel.Resources>
+                            <Style BasedOn="{StaticResource DiscriptionTextStyle}" TargetType="{x:Type TextBlock}" />
+                        </StackPanel.Resources>
+                        <TextBlock FontWeight="Bold" FontSize="17">General Information</TextBlock>
+                        <TextBlock><Run Text ="Category: " FontWeight="DemiBold"/> <Run Text="{Binding Category}"/></TextBlock>
+                        <TextBlock><Run Text ="Location: " FontWeight="DemiBold"/><Run Text="{Binding Location}"/></TextBlock>
+                        <TextBlock FontWeight="Bold" FontSize="17">Orbital characteristics</TextBlock>
+                        <TextBlock><Run Text ="Average distance from the sun: " FontWeight="DemiBold"/><Run Text="{Binding AvgDistanceFromSun}"/> km</TextBlock>
+                        <TextBlock><Run Text="period: " FontWeight="DemiBold"/><Run Text="{Binding OrbitalPeriod}" /> days</TextBlock>
+                        <TextBlock><Run Text="Average orbital speed: " FontWeight="DemiBold"/><Run Text="{Binding AvgOrbitalSpeed}"/> km/s</TextBlock>
+                        <TextBlock><Run Text="Inclination: " FontWeight="DemiBold"/><Run Text="{Binding Inclination}" />°</TextBlock>
+                        <TextBlock><Run Text="Satellites: " FontWeight="DemiBold"/><Run Text="{Binding Satellites}" /></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
+                        <StackPanel.Resources>
+                            <Style BasedOn="{StaticResource DiscriptionTextStyle}" TargetType="{x:Type TextBlock}" />
+                        </StackPanel.Resources>
+                        <TextBlock FontWeight="Bold" FontSize="17">Physical characteristics</TextBlock>
+                        <TextBlock><Run Text="Mean radius: " FontWeight="DemiBold"/><Run Text="{Binding Radius}" /> km</TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Surface area: " FontWeight="DemiBold"/>
+                            <TextBlock x:Name="SurfaceTxtBlock"/>
+                            <TextBlock x:Name="txtBlock1" Typography.Variants="Superscript"/>
+                            <TextBlock Text=" km&#x00B2;" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Mass: " FontWeight="DemiBold"/>
+                            <TextBlock x:Name="MassTxtBlock"></TextBlock>
+                            <TextBlock x:Name="txtBlock2" Typography.Variants="Superscript"/>
+                            <TextBlock Text=" kg" />
+                        </StackPanel>
+                        <TextBlock><Run Text="Mean density: " FontWeight="DemiBold"/><Run Text="{Binding Density}" /><Run Text=" g/cm&#x00B3;" /></TextBlock>
+                        <TextBlock><Run Text="Rotation period: " FontWeight="DemiBold"/><Run Text="{Binding RotationPeriod}" /> days</TextBlock>
+                        <TextBlock><Run Text="Rotation Speed: " FontWeight="DemiBold"/><Run Text="{Binding RotationSpeed}" /> km/s</TextBlock>
+                        <TextBlock><Run Text="Axial tilt: " FontWeight="DemiBold"/><Run Text="{Binding AxialTilt}" />°</TextBlock>
+                        <TextBlock><Run Text="Average surface temperature: " FontWeight="DemiBold"/><Run Text="{Binding AvgSurfaceTemp}" /> °C</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
 
-            </materialDesign:Card>
-        </Grid>
 
         <Grid x:Name="GridCarusel">
             <telerik:RadCarousel x:Name="MyCarousel" ItemsSource="{Binding SolarSystemPlanets}" CanUserSelect="False" ItemTemplate="{StaticResource customItemTemplate}" HorizontalScrollBarVisibility="Hidden">
@@ -94,18 +111,6 @@
                             <telerik:RadCarouselPanel.Path>
                                 <Path Stroke="Aqua" StrokeThickness="1" RenderTransformOrigin="0.5,0.5"  Data="M 195,125 A 500,250 0 1 1 194,125"/>
                             </telerik:RadCarouselPanel.Path>
-                            <telerik:RadCarouselPanel.ScaleStops>
-                                <telerik:PathStopCollection>
-                                    <!--<telerik:PathStop PathFraction="0.0" Value="1.0"/>
-                                    --><!--<telerik:PathStop PathFraction="0.2" Value="1.0"/>--><!--
-                                    <telerik:PathStop PathFraction="1.0" Value="1.0"/>
-                                    <telerik:PathStop PathFraction="0.6" Value="2.0"/>-->
-                                    <!--<telerik:PathStop PathFraction="0.7" Value="1.5"/>
-                                <telerik:PathStop PathFraction="0.8" Value="1.0"/>
-                                <telerik:PathStop PathFraction="0.4" Value="0.5"/>
-                                <telerik:PathStop PathFraction="0.2" Value="0.1"/>-->
-                                </telerik:PathStopCollection>
-                            </telerik:RadCarouselPanel.ScaleStops>
                         </telerik:RadCarouselPanel>
                     </ItemsPanelTemplate>
                 </telerik:RadCarousel.ItemsPanel>
