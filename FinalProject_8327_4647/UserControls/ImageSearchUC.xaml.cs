@@ -7,6 +7,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using FinalProject_8327_4647.Converters;
 using FinalProject_8327_4647.ViewModels;
+using FinalProject_8327_4647.Converters;
 
 namespace FinalProject_8327_4647.UserControls
 {

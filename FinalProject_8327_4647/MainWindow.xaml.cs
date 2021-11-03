@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using FinalProject_8327_4647.UserControls;
+using System.Windows;
 using System.Windows.Controls;
-using FinalProject_8327_4647.UserControls;
 
 namespace FinalProject_8327_4647
 {

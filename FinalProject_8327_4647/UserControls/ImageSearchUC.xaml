@@ -17,7 +17,6 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Images/planetsBack.png"  />
         </Grid.Background>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
             <!--<RowDefinition Height="5"/>-->
