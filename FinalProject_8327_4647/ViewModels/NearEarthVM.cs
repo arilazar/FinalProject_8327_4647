@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FinalProject_8327_4647.ViewModels
 {
@@ -85,8 +86,10 @@ namespace FinalProject_8327_4647.ViewModels
             }
             set
             {
+                
                 if (null == value)
                     return;
+                Application.Current.Dispatcher.Invoke(new Action(() => { nearEarthObjects.Clear(); }));
                 nearEarthObjects = value;
                 OnPropertyChanged();
             }

@@ -15,8 +15,12 @@ namespace DL
     {
         private HttpClient httpClient;
 
+        /*Old
         private const string IMAGGA_API_KEY = "acc_c282840c1b7255d";
-        private const string IMAGGA_API_SECRET = "d8fb6f7ef0ff13f918f61f9fa7cc8053";
+        private const string IMAGGA_API_SECRET = "d8fb6f7ef0ff13f918f61f9fa7cc8053";*/
+        //New
+        private const string IMAGGA_API_KEY = "acc_607ee6802fc767d";
+        private const string IMAGGA_API_SECRET = "5bdc3f449e0034b600707d31d7f8669d";
         private const string NASA_APIKEY = "dKGbkafEfGBA8WM7V5LwguoCAIoP9DfhITdKbb59";
 
         public DLClass()
@@ -75,8 +79,8 @@ namespace DL
             {
                 using (var dbcontext = new PlanetsDB())
                 {
-                    dbcontext.PlanetsDataSet.RemoveRange(dbcontext.PlanetsDataSet.ToList());
-                    dbcontext.SaveChanges();
+                    //dbcontext.PlanetsDataSet.RemoveRange(dbcontext.PlanetsDataSet.ToList());
+                    //dbcontext.SaveChanges();
                     if (dbcontext.PlanetsDataSet.ToList().Count == 0)
                     {
                         var link = "https://firebasestorage.googleapis.com/v0/b/stars-tracking-63e30.appspot.com/o/";
@@ -262,8 +266,5 @@ namespace DL
                 }
             });
         }
-
-      
-
     }
 }

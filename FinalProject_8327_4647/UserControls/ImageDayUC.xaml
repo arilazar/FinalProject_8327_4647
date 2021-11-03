@@ -28,11 +28,19 @@
         <Border BorderBrush="Black" BorderThickness="10" Margin="0,0,40,0">
             <StackPanel>
                 <telerik:ProgressPresenter />
-            <Image Source="{Binding UrlImage}" />
+                <Image Source="{Binding UrlImage}" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="Image_MouseDown"/>
             </StackPanel>
         </Border>
+        <Border x:Name="descriptionBorder" CornerRadius="30" Height="200" VerticalAlignment="Bottom" Margin="20,20,60,20">
+            <StackPanel  VerticalAlignment="Bottom">
+                <TextBlock Style="{StaticResource AnnotationStyle}" Text="{Binding Title}"/>
+                <TextBlock Text="{Binding Description}" Margin="20" HorizontalAlignment="Center"  TextWrapping="Wrap" TextAlignment="Center" FontSize="15">
+                </TextBlock>
 
-        <TextBlock Name="ImageName" Style="{StaticResource AnnotationStyle}"
-                   Text="{Binding Title}"/>
+            </StackPanel>
+            <Border.Background>
+                <SolidColorBrush Color="Azure" Opacity="0.5" />
+            </Border.Background>
+        </Border>
     </Grid>
 </UserControl>

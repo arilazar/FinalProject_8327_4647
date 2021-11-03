@@ -74,12 +74,6 @@ namespace BL
             return neoList;
         }
 
-        //first virsion
-        //public ObservableCollection<Star> GetPlanets()
-        //{
-        //    return new ObservableCollection<Star>(StarServ.GetPlanets());
-        //}
-
         public async Task<List<Planets>> GetSolarSystem()
         {
             return await myDL.GetSolarSysytem();

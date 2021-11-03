@@ -42,7 +42,7 @@ namespace FinalProject_8327_4647
         }
         private void ExitCMD()
         {
-            Close();
+            Application.Current.Shutdown();
         }
 
         private void DoCMD(UIElement uc)

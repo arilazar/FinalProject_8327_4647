@@ -91,7 +91,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="SearchImage.cs" />
-    <Compile Include="Star.cs" />
     <Compile Include="TagResult.cs" />
   </ItemGroup>
   <ItemGroup>

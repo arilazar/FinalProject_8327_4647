@@ -12,10 +12,17 @@
         d:DesignHeight="450" d:DesignWidth="800" >
     <UserControl.Resources>
         <Style x:Key="DiscriptionTextStyle" TargetType="{x:Type TextBlock}">
-                <Setter Property="FontFamily" Value="Champagne &amp; Limousines"/>
-                <Setter Property="FontSize" Value="15"/>
-                <Setter Property="Margin" Value="1"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Champagne &amp; Limousines"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" Color="White" Opacity="10" BlurRadius="30"/>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -39,8 +46,15 @@
             </Style>
         </Grid.Resources>
 
-        <Border Background="White" BorderThickness="5" Margin="-40,0,0,400" Width="760" Height="400" CornerRadius="25" Panel.ZIndex="2">
-            <Grid x:Name="GridDiscription"   Background="Transparent"  RenderTransformOrigin="0.5,0.5">
+        <Border x:Name="GridDiscription" BorderBrush="Black" BorderThickness="2" Margin="-40,0,0,400" Width="760" Height="400" CornerRadius="55" Panel.ZIndex="2">
+            <Border.Background>
+                <ImageBrush ImageSource="{Binding ImageUrl}" Stretch="Uniform" ViewboxUnits="Absolute" Viewbox="440,210,150,85"/>
+            </Border.Background>
+
+            <Grid  Background="Transparent"   RenderTransformOrigin="0.5,0.5">
+                <Grid.Resources>
+                    <Style BasedOn="{StaticResource DiscriptionTextStyle}" TargetType="{x:Type TextBlock}" />
+                </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="180"/>
                     <RowDefinition Height="5"/>
@@ -50,54 +64,50 @@
                     <TextBlock Margin="0,0,0,0" FontWeight="Bold" FontSize="30" HorizontalAlignment="Center" Text="{Binding Name}" ></TextBlock>
                     <TextBlock Margin="5" FontSize="20" TextWrapping="WrapWithOverflow" TextAlignment="Center" Text="{Binding GeneralInfo}"></TextBlock>
                 </StackPanel>
-                <Separator Grid.Row="1"/>
+                <Separator Grid.Row="1"  Background="Black"/>
                 <Grid Margin="5" Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Vertical" Grid.Column="0" HorizontalAlignment="Center" >
-                        <StackPanel.Resources>
-                            <Style BasedOn="{StaticResource DiscriptionTextStyle}" TargetType="{x:Type TextBlock}" />
-                        </StackPanel.Resources>
                         <TextBlock FontWeight="Bold" FontSize="17">General Information</TextBlock>
-                        <TextBlock><Run Text ="Category: " FontWeight="DemiBold"/> <Run Text="{Binding Category}"/></TextBlock>
-                        <TextBlock><Run Text ="Location: " FontWeight="DemiBold"/><Run Text="{Binding Location}"/></TextBlock>
+                        <TextBlock><Run Text ="Category: " FontWeight="Bold"/> <Run Text="{Binding Category}"/></TextBlock>
+                        <TextBlock><Run Text ="Location: " FontWeight="Bold"/><Run Text="{Binding Location}"/></TextBlock>
                         <TextBlock FontWeight="Bold" FontSize="17">Orbital characteristics</TextBlock>
-                        <TextBlock><Run Text ="Average distance from the sun: " FontWeight="DemiBold"/><Run Text="{Binding AvgDistanceFromSun}"/> km</TextBlock>
-                        <TextBlock><Run Text="period: " FontWeight="DemiBold"/><Run Text="{Binding OrbitalPeriod}" /> days</TextBlock>
-                        <TextBlock><Run Text="Average orbital speed: " FontWeight="DemiBold"/><Run Text="{Binding AvgOrbitalSpeed}"/> km/s</TextBlock>
-                        <TextBlock><Run Text="Inclination: " FontWeight="DemiBold"/><Run Text="{Binding Inclination}" />°</TextBlock>
-                        <TextBlock><Run Text="Satellites: " FontWeight="DemiBold"/><Run Text="{Binding Satellites}" /></TextBlock>
+                        <TextBlock><Run Text ="Average distance from the sun: " FontWeight="Bold"/><Run Text="{Binding AvgDistanceFromSun}"/> km</TextBlock>
+                        <TextBlock><Run Text="period: " FontWeight="Bold"/><Run Text="{Binding OrbitalPeriod}" /> days</TextBlock>
+                        <TextBlock><Run Text="Average orbital speed: " FontWeight="Bold"/><Run Text="{Binding AvgOrbitalSpeed}"/> km/s</TextBlock>
+                        <TextBlock><Run Text="Inclination: " FontWeight="Bold"/><Run Text="{Binding Inclination}" />°</TextBlock>
+                        <TextBlock><Run Text="Satellites: " FontWeight="Bold"/><Run Text="{Binding Satellites}" /></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center">
-                        <StackPanel.Resources>
-                            <Style BasedOn="{StaticResource DiscriptionTextStyle}" TargetType="{x:Type TextBlock}" />
-                        </StackPanel.Resources>
                         <TextBlock FontWeight="Bold" FontSize="17">Physical characteristics</TextBlock>
-                        <TextBlock><Run Text="Mean radius: " FontWeight="DemiBold"/><Run Text="{Binding Radius}" /> km</TextBlock>
+                        <TextBlock><Run Text="Mean radius: " FontWeight="Bold"/><Run Text="{Binding Radius}" /> km</TextBlock>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="Surface area: " FontWeight="DemiBold"/>
+                            <TextBlock Text="Surface area: " FontWeight="Bold"/>
                             <TextBlock x:Name="SurfaceTxtBlock"/>
                             <TextBlock x:Name="txtBlock1" Typography.Variants="Superscript"/>
                             <TextBlock Text=" km&#x00B2;" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="Mass: " FontWeight="DemiBold"/>
+                            <TextBlock Text="Mass: " FontWeight="Bold"/>
                             <TextBlock x:Name="MassTxtBlock"></TextBlock>
                             <TextBlock x:Name="txtBlock2" Typography.Variants="Superscript"/>
                             <TextBlock Text=" kg" />
                         </StackPanel>
-                        <TextBlock><Run Text="Mean density: " FontWeight="DemiBold"/><Run Text="{Binding Density}" /><Run Text=" g/cm&#x00B3;" /></TextBlock>
-                        <TextBlock><Run Text="Rotation period: " FontWeight="DemiBold"/><Run Text="{Binding RotationPeriod}" /> days</TextBlock>
-                        <TextBlock><Run Text="Rotation Speed: " FontWeight="DemiBold"/><Run Text="{Binding RotationSpeed}" /> km/s</TextBlock>
-                        <TextBlock><Run Text="Axial tilt: " FontWeight="DemiBold"/><Run Text="{Binding AxialTilt}" />°</TextBlock>
-                        <TextBlock><Run Text="Average surface temperature: " FontWeight="DemiBold"/><Run Text="{Binding AvgSurfaceTemp}" /> °C</TextBlock>
+                        <TextBlock><Run Text="Mean density: " FontWeight="Bold"/><Run Text="{Binding Density}" /><Run Text=" g/cm&#x00B3;" /></TextBlock>
+                        <TextBlock><Run Text="Rotation period: " FontWeight="Bold"/><Run Text="{Binding RotationPeriod}" /> days</TextBlock>
+                        <TextBlock><Run Text="Rotation Speed: " FontWeight="Bold"/><Run Text="{Binding RotationSpeed}" /> km/s</TextBlock>
+                        <TextBlock><Run Text="Axial tilt: " FontWeight="Bold"/><Run Text="{Binding AxialTilt}" />°</TextBlock>
+                        <TextBlock><Run Text="Average surface temperature: " FontWeight="Bold"/><Run Text="{Binding AvgSurfaceTemp}" /> °C</TextBlock>
                     </StackPanel>
                 </Grid>
             </Grid>
         </Border>
 
+        <!--<ProgressBar Name="ImageProgressBar" Grid.Row="1" Width="150" VerticalAlignment="Center" Panel.ZIndex="1" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True"
+                     Visibility="{Binding SolarSystemPlanets ,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,Converter={StaticResource visibleConverter}}" />-->
 
         <Grid x:Name="GridCarusel">
             <telerik:RadCarousel x:Name="MyCarousel" ItemsSource="{Binding SolarSystemPlanets}" CanUserSelect="False" ItemTemplate="{StaticResource customItemTemplate}" HorizontalScrollBarVisibility="Hidden">

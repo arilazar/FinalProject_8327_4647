@@ -1,5 +1,6 @@
 ﻿using FinalProject_8327_4647.ViewModels;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace FinalProject_8327_4647
 {
@@ -14,6 +15,14 @@ namespace FinalProject_8327_4647
         {
             DataContext = viewModel;
             InitializeComponent();
+        }
+
+        private void Image_MouseDown(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (descriptionBorder.Visibility == Visibility.Visible)
+                descriptionBorder.Visibility = Visibility.Hidden;
+            else
+                descriptionBorder.Visibility = Visibility.Visible;
         }
     }
 }

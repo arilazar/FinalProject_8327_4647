@@ -17,7 +17,6 @@
         <converter:ConverterterToVisible x:Key="visibleConverter"/>
         <Style BasedOn="{StaticResource neoTextbox}" TargetType="{x:Type TextBox}" />
         <Style BasedOn="{StaticResource neoTextBlock}" TargetType="{x:Type TextBlock}" />
-
     </UserControl.Resources>
 
     <Grid>
@@ -25,23 +24,29 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/planetsBack.png"  />
+        </Grid.Background>
+        <Border Background="LightGray"  CornerRadius="30" Width="1100" Height="80">
+            <StackPanel Orientation="Horizontal" Background="Transparent" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Minimum size" VerticalAlignment="Center" TextAlignment="Center"/>
+                <TextBox x:Name="minSizeTB" Width="50" Text="{Binding MinSize, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
+                <TextBlock Text="Hazard?" VerticalAlignment="Center"/>
+                <CheckBox x:Name="hazardCB" VerticalAlignment="Center" IsChecked="{Binding HazardOnly}"/>
+                <TextBlock Text="From date" VerticalAlignment="Center"/>
+                <DatePicker x:Name="fromDate" Width="100" Foreground="Black" SelectedDate="{Binding FromDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="fromDate_SelectedDateChanged"/>
+                <TextBlock Text="To date" VerticalAlignment="Center"/>
+                <DatePicker x:Name="toDate" Width="100" SelectedDate="{Binding ToDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="toDate_SelectedDateChanged"/>
+                <TextBlock Text="{Binding NearEarthObjects.Count, StringFormat='Num of objects : {0}'}" VerticalAlignment="Center"/>
+                <Button x:Name="searchHazardsBT" Content="Find hazards" Background="#125abe" Click="SearchHazardsBT_Click" FontSize="18" Margin="20"/>
+            </StackPanel>
+        </Border>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Minimum size" VerticalAlignment="Center" TextAlignment="Center"/>
-            <TextBox x:Name="minSizeTB" Width="50" Text="{Binding MinSize, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
-            <TextBlock Text="Hazard?" VerticalAlignment="Center"/>
-            <CheckBox x:Name="hazardCB" VerticalAlignment="Center" IsChecked="{Binding HazardOnly}"/>
-            <TextBlock Text="From date" VerticalAlignment="Center"/>
-            <DatePicker x:Name="fromDate" Width="100" SelectedDate="{Binding FromDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="fromDate_SelectedDateChanged"/>
-            <TextBlock Text="To date" VerticalAlignment="Center"/>
-            <DatePicker x:Name="toDate" Width="100" SelectedDate="{Binding ToDate, Mode=OneWay}" IsTodayHighlighted="True" SelectedDateChanged="toDate_SelectedDateChanged"/>
-            <TextBlock Text="{Binding NearEarthObjects.Count, StringFormat='Num of objects : {0}'}" VerticalAlignment="Center"/>
-            <Button x:Name="searchHazardsBT" Content="Find hazards" Click="SearchHazardsBT_Click" FontSize="18" Margin="20"/>
-        </StackPanel>
         <ProgressBar Name="ImageProgressBar" Grid.Row="1" Width="150" VerticalAlignment="Center" Panel.ZIndex="1" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True"
-                     Visibility="{Binding NearEarthObjects.Count,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,Converter={StaticResource visibleConverter}}" />
-        <DataGrid Name="dataGrid" Grid.Row="1" HorizontalAlignment="Stretch" ColumnWidth="*" Margin="50,0,50,50" GridLinesVisibility="Vertical" HeadersVisibility="All"
-                  Background="LightGray" RowBackground="LightYellow" AlternatingRowBackground="LightBlue" IsReadOnly="True"
+                     Visibility="Hidden" />
+
+        <DataGrid  Name="dataGrid" Grid.Row="1" HorizontalAlignment="Stretch" ColumnWidth="*" Margin="50,20,90,50" GridLinesVisibility="Vertical" HeadersVisibility="All"
+                   Background="Transparent" RowBackground="LightGray" AlternatingRowBackground="#b1d4ec" IsReadOnly="True"
                   CanUserResizeColumns="False" CanUserReorderColumns="False" TextBlock.FontSize="14" TextBlock.TextAlignment="Center" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding NearEarthObjects}" AutoGenerateColumns="True" AutoGeneratingColumn="dataGrid_AutoGeneratingColumn">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -50,6 +55,7 @@
                     <Setter Property="FontWeight" Value="SemiBold"/>
                     <Setter Property="BorderThickness" Value="3"/>
                     <Setter Property="BorderBrush" Value="Azure"/>
+                    <Setter Property="Foreground" Value="Azure"/>
                 </Style>
             </DataGrid.ColumnHeaderStyle>
         </DataGrid>

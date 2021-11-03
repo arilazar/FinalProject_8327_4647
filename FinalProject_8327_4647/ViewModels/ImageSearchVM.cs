@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using BE;
 
 namespace FinalProject_8327_4647.ViewModels
@@ -24,6 +26,7 @@ namespace FinalProject_8327_4647.ViewModels
             }
             set
             {
+                Application.Current.Dispatcher.Invoke(new Action(() => { searchImageCollection.Clear(); }));
                 searchImageCollection = value;
                 OnPropertyChanged();
             }
